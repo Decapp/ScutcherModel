@@ -11,12 +11,20 @@ namespace App
 {
     public partial class Parameters : Form
     {
-        public Parameters()
-        {
-            InitializeComponent();
+        Bitmap mbit;
+        Graphics graphics;
+            
+            Pen pen = new Pen(Color.Black, 1f);
+            Pen redPen = new Pen(Color.Red, 2f);
 
-            radioButton8.Checked = true;
-        }
+            public Parameters()
+            {
+                InitializeComponent();
+
+                PictureRefresh();
+
+                radioButton8.Checked = true;
+            }
 
 
         private void radioButton8_CheckedChanged(object sender, EventArgs e)
@@ -213,6 +221,77 @@ namespace App
             this.Owner.Close();
         }
 
+        private void Parameters_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PictureRefresh()
+        {
+            double k = 300;
+
+            int beatCount = int.Parse(textBox40.Text);
+
+            double startAngle1 = double.Parse(textBox7.Text);
+            double startAngle2 = double.Parse(textBox35.Text);
+
+            double [,] rollParameter = new double[beatCount * 2, 6];
+
+            for (int i = 0; i < beatCount; i++)
+            {
+                ///Левый барабан
+
+                rollParameter[i, 0] = double.Parse(textBox39.Text);
+                rollParameter[i, 1] = double.Parse(textBox3.Text);
+                rollParameter[i, 2] = double.Parse(textBox42.Text);
+                rollParameter[i, 3] = double.Parse(textBox38.Text) + double.Parse(textBox30.Text);
+                rollParameter[i, 4] = startAngle1 + (i + 1) * (360 / beatCount);
+                rollParameter[i, 5] = 1;
+
+                ///Правый барабан
+
+                rollParameter[i + beatCount, 0] = double.Parse(textBox39.Text);
+                rollParameter[i + beatCount, 1] = double.Parse(textBox34.Text);
+                rollParameter[i + beatCount, 2] = double.Parse(textBox42.Text);
+                rollParameter[i + beatCount, 3] = double.Parse(textBox28.Text) + double.Parse(textBox30.Text);
+                rollParameter[i + beatCount, 4] = startAngle2 + (i + 1) * (360 / beatCount); ;
+                rollParameter[i + beatCount, 5] = -1;
+            }
+
+            Beater[] beaters = new Beater[rollParameter.GetLength(0)];
+
+            for (int i = 0; i < rollParameter.GetLength(0); i++)
+            {
+                beaters[i] = new Beater(rollParameter[i, 0], rollParameter[i, 1],
+                    rollParameter[i, 2], rollParameter[i, 3],
+                    rollParameter[i, 4], (int)rollParameter[i, 5]);
+            }
+
+            mbit = new Bitmap(pictureBox2.Width, pictureBox2.Height);
+            graphics = Graphics.FromImage(mbit);
+            graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+
+            try
+            {
+                /// била
+                for (int i = 0; i < beaters.Length; i++)
+                {
+                    graphics.DrawLine(pen, (int)(k * beaters[i].Edge.X), (int)(k * beaters[i].Edge.Y),
+                        (int)(k * beaters[i].Center.X), (int)(k * beaters[i].Center.Y));
+                }
+
+                pictureBox2.Image = mbit;
+            }
+            catch 
+            {
+                MessageBox.Show("Ошибка переполнения");
+            }
         
+        }
+
+        private void textBox42_TextChanged(object sender, EventArgs e)
+        {
+            PictureRefresh();
+        }
     }
 }

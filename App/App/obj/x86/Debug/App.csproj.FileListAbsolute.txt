@@ -267,3 +267,14 @@ D:\Учеба\Дипломная работа\Новая папка\27.05.2016 -
 D:\Учеба\Дипломная работа\Новая папка\27.05.2016 - Запись результата в Excel\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache
 D:\Учеба\Дипломная работа\Новая папка\27.05.2016 - Запись результата в Excel\App\App\bin\Debug\App.exe
 D:\Учеба\Дипломная работа\Новая папка\27.05.2016 - Запись результата в Excel\App\App\bin\Debug\App.pdb
+D:\ScutcherModel\App\App\obj\x86\Debug\App.exe
+D:\ScutcherModel\App\App\obj\x86\Debug\App.pdb
+D:\ScutcherModel\App\App\bin\Debug\App.exe
+D:\ScutcherModel\App\App\bin\Debug\App.pdb
+D:\ScutcherModel\App\App\obj\x86\Debug\App.Animation.resources
+D:\ScutcherModel\App\App\obj\x86\Debug\App.Diagram.resources
+D:\ScutcherModel\App\App\obj\x86\Debug\App.Parameters.resources
+D:\ScutcherModel\App\App\obj\x86\Debug\App.Properties.Resources.resources
+D:\ScutcherModel\App\App\obj\x86\Debug\App.TestForm.resources
+D:\ScutcherModel\App\App\obj\x86\Debug\App.WorkForm.resources
+D:\ScutcherModel\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache

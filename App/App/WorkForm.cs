@@ -160,7 +160,7 @@ namespace App
             }
             else
             {
-                beaters = new Beater[parameters.rollParameter.GetLength(1)];
+                beaters = new Beater[parameters.rollParameter.GetLength(0)];
 
                 for (int i = 0; i < parameters.rollParameter.GetLength(0); i++)
                 {

@@ -1,0 +1,269 @@
+C:\Users\User\Desktop\App\App\bin\Debug\App.exe
+C:\Users\User\Desktop\App\App\bin\Debug\App.pdb
+C:\Users\User\Desktop\App\App\obj\x86\Debug\App.Properties.Resources.resources
+C:\Users\User\Desktop\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache
+C:\Users\User\Desktop\App\App\obj\x86\Debug\App.exe
+C:\Users\User\Desktop\App\App\obj\x86\Debug\App.pdb
+K:\App\App\obj\x86\Debug\App.exe
+K:\App\App\obj\x86\Debug\App.pdb
+K:\App\App\bin\Debug\App.exe
+K:\App\App\bin\Debug\App.pdb
+K:\App\App\obj\x86\Debug\App.Properties.Resources.resources
+F:\App\App\obj\x86\Debug\App.exe
+F:\App\App\obj\x86\Debug\App.pdb
+F:\App\App\bin\Debug\App.exe
+F:\App\App\bin\Debug\App.pdb
+F:\App\App\obj\x86\Debug\App.Properties.Resources.resources
+H:\App\App\obj\x86\Debug\App.exe
+H:\App\App\obj\x86\Debug\App.pdb
+H:\App\App\obj\x86\Debug\App.Parameters.resources
+H:\App\App\obj\x86\Debug\App.Properties.Resources.resources
+H:\App\App\obj\x86\Debug\App.WorkForm.resources
+H:\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache
+H:\App\App\obj\x86\Debug\App.Graph.resources
+H:\App\App\bin\Debug\App.exe
+H:\App\App\bin\Debug\App.pdb
+H:\App\App\obj\x86\Debug\App.Animation.resources
+E:\App\App\obj\x86\Debug\App.exe
+E:\App\App\obj\x86\Debug\App.pdb
+E:\App\App\bin\Debug\App.exe
+E:\App\App\bin\Debug\App.pdb
+E:\App\App\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\App\App\obj\x86\Debug\App.Animation.resources
+E:\App\App\obj\x86\Debug\App.Graph.resources
+E:\App\App\obj\x86\Debug\App.Parameters.resources
+E:\App\App\obj\x86\Debug\App.Properties.Resources.resources
+E:\App\App\obj\x86\Debug\App.WorkForm.resources
+E:\App\App\obj\x86\Debug\GenerateResource.read.1.tlog
+E:\App\App\obj\x86\Debug\GenerateResource.write.1.tlog
+F:\App\App\obj\x86\Debug\App.Animation.resources
+F:\App\App\obj\x86\Debug\App.Graph.resources
+F:\App\App\obj\x86\Debug\App.Parameters.resources
+F:\App\App\obj\x86\Debug\App.WorkForm.resources
+F:\App\App\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\App\App\obj\x86\Debug\GenerateResource.read.1.tlog
+F:\App\App\obj\x86\Debug\GenerateResource.write.1.tlog
+K:\App\App\obj\x86\Debug\App.Animation.resources
+K:\App\App\obj\x86\Debug\App.Graph.resources
+K:\App\App\obj\x86\Debug\App.Parameters.resources
+K:\App\App\obj\x86\Debug\App.WorkForm.resources
+K:\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache
+K:\App\App\obj\x86\Debug\App.csprojResolveAssemblyReference.cache
+H:\App\App\obj\x86\Debug\App.csprojResolveAssemblyReference.cache
+F:\Майоров В.А\App\App\obj\x86\Debug\App.exe
+F:\Майоров В.А\App\App\obj\x86\Debug\App.pdb
+F:\Майоров В.А\App\App\bin\Debug\App.exe
+F:\Майоров В.А\App\App\bin\Debug\App.pdb
+F:\Майоров В.А\App\App\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\Майоров В.А\App\App\obj\x86\Debug\App.Animation.resources
+F:\Майоров В.А\App\App\obj\x86\Debug\App.Graph.resources
+F:\Майоров В.А\App\App\obj\x86\Debug\App.Parameters.resources
+F:\Майоров В.А\App\App\obj\x86\Debug\App.Properties.Resources.resources
+F:\Майоров В.А\App\App\obj\x86\Debug\App.WorkForm.resources
+F:\Майоров В.А\App\App\obj\x86\Debug\GenerateResource.read.1.tlog
+F:\Майоров В.А\App\App\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\User\Desktop\App\App\obj\x86\Debug\App.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\App\App\obj\x86\Debug\App.Animation.resources
+C:\Users\User\Desktop\App\App\obj\x86\Debug\App.Graph.resources
+C:\Users\User\Desktop\App\App\obj\x86\Debug\App.Parameters.resources
+C:\Users\User\Desktop\App\App\obj\x86\Debug\App.WorkForm.resources
+C:\Users\User\Desktop\Версия с несколькими билами\App\App\obj\x86\Debug\App.exe
+C:\Users\User\Desktop\Версия с несколькими билами\App\App\obj\x86\Debug\App.pdb
+C:\Users\User\Desktop\Версия с несколькими билами\App\App\obj\x86\Debug\App.Animation.resources
+C:\Users\User\Desktop\Версия с несколькими билами\App\App\obj\x86\Debug\App.Graph.resources
+C:\Users\User\Desktop\Версия с несколькими билами\App\App\obj\x86\Debug\App.Parameters.resources
+C:\Users\User\Desktop\Версия с несколькими билами\App\App\obj\x86\Debug\App.Properties.Resources.resources
+C:\Users\User\Desktop\Версия с несколькими билами\App\App\obj\x86\Debug\App.WorkForm.resources
+C:\Users\User\Desktop\Версия с несколькими билами\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache
+C:\Users\User\Desktop\Версия с несколькими билами\App\App\bin\Debug\App.exe
+C:\Users\User\Desktop\Версия с несколькими билами\App\App\bin\Debug\App.pdb
+F:\Версия с несколькими билами\App\App\obj\x86\Debug\App.exe
+F:\Версия с несколькими билами\App\App\obj\x86\Debug\App.pdb
+F:\Версия с несколькими билами\App\App\bin\Debug\App.exe
+F:\Версия с несколькими билами\App\App\bin\Debug\App.pdb
+F:\Версия с несколькими билами\App\App\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\Версия с несколькими билами\App\App\obj\x86\Debug\App.Animation.resources
+F:\Версия с несколькими билами\App\App\obj\x86\Debug\App.Graph.resources
+F:\Версия с несколькими билами\App\App\obj\x86\Debug\App.Parameters.resources
+F:\Версия с несколькими билами\App\App\obj\x86\Debug\App.Properties.Resources.resources
+F:\Версия с несколькими билами\App\App\obj\x86\Debug\App.WorkForm.resources
+F:\Версия с несколькими билами\App\App\obj\x86\Debug\GenerateResource.read.1.tlog
+F:\Версия с несколькими билами\App\App\obj\x86\Debug\GenerateResource.write.1.tlog
+H:\Версия с несколькими билами\App\App\obj\x86\Debug\App.exe
+H:\Версия с несколькими билами\App\App\obj\x86\Debug\App.pdb
+H:\Версия с несколькими билами\App\App\bin\Debug\App.exe
+H:\Версия с несколькими билами\App\App\bin\Debug\App.pdb
+H:\Версия с несколькими билами\App\App\obj\x86\Debug\App.csprojResolveAssemblyReference.cache
+H:\Версия с несколькими билами\App\App\obj\x86\Debug\App.Animation.resources
+H:\Версия с несколькими билами\App\App\obj\x86\Debug\App.Graph.resources
+H:\Версия с несколькими билами\App\App\obj\x86\Debug\App.Parameters.resources
+H:\Версия с несколькими билами\App\App\obj\x86\Debug\App.Properties.Resources.resources
+H:\Версия с несколькими билами\App\App\obj\x86\Debug\App.WorkForm.resources
+H:\Версия с несколькими билами\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache
+D:\Новая папка (2)\Версия с несколькими билами\App\App\obj\x86\Debug\App.exe
+D:\Новая папка (2)\Версия с несколькими билами\App\App\obj\x86\Debug\App.pdb
+D:\Новая папка (2)\Версия с несколькими билами\App\App\obj\x86\Debug\App.csprojResolveAssemblyReference.cache
+D:\Новая папка (2)\Версия с несколькими билами\App\App\obj\x86\Debug\App.Animation.resources
+D:\Новая папка (2)\Версия с несколькими билами\App\App\obj\x86\Debug\App.Parameters.resources
+D:\Новая папка (2)\Версия с несколькими билами\App\App\obj\x86\Debug\App.Properties.Resources.resources
+D:\Новая папка (2)\Версия с несколькими билами\App\App\obj\x86\Debug\App.TestForm.resources
+D:\Новая папка (2)\Версия с несколькими билами\App\App\obj\x86\Debug\App.WorkForm.resources
+D:\Новая папка (2)\Версия с несколькими билами\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache
+D:\Новая папка (2)\Версия с несколькими билами\App\App\bin\Debug\App.exe
+D:\Новая папка (2)\Версия с несколькими билами\App\App\bin\Debug\App.pdb
+C:\Documents and Settings\Admin\Рабочий стол\Версия с несколькими билами\App\App\obj\x86\Debug\App.exe
+C:\Documents and Settings\Admin\Рабочий стол\Версия с несколькими билами\App\App\obj\x86\Debug\App.pdb
+C:\Documents and Settings\Admin\Рабочий стол\Версия с несколькими билами\App\App\bin\Debug\App.exe
+C:\Documents and Settings\Admin\Рабочий стол\Версия с несколькими билами\App\App\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Admin\Рабочий стол\Версия с несколькими билами\App\App\obj\x86\Debug\App.Animation.resources
+C:\Documents and Settings\Admin\Рабочий стол\Версия с несколькими билами\App\App\obj\x86\Debug\App.Parameters.resources
+C:\Documents and Settings\Admin\Рабочий стол\Версия с несколькими билами\App\App\obj\x86\Debug\App.Properties.Resources.resources
+C:\Documents and Settings\Admin\Рабочий стол\Версия с несколькими билами\App\App\obj\x86\Debug\App.TestForm.resources
+C:\Documents and Settings\Admin\Рабочий стол\Версия с несколькими билами\App\App\obj\x86\Debug\App.WorkForm.resources
+C:\Documents and Settings\Admin\Рабочий стол\Версия с несколькими билами\App\App\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Admin\Рабочий стол\Версия с несколькими билами\App\App\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\Admin\Рабочий стол\Версия с несколькими билами\App\App\bin\Debug\App.pdb
+C:\Documents and Settings\Admin\Рабочий стол\Версия с несколькими билами\App\App\obj\x86\Debug\App.Diagram.resources
+C:\Users\Decapp\Desktop\Версия с несколькими билами_28.02.2016\App\App\bin\Debug\App.exe
+C:\Users\Decapp\Desktop\Версия с несколькими билами_28.02.2016\App\App\bin\Debug\App.pdb
+C:\Users\Decapp\Desktop\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.Animation.resources
+C:\Users\Decapp\Desktop\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.Diagram.resources
+C:\Users\Decapp\Desktop\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.Parameters.resources
+C:\Users\Decapp\Desktop\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.Properties.Resources.resources
+C:\Users\Decapp\Desktop\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.TestForm.resources
+C:\Users\Decapp\Desktop\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.WorkForm.resources
+C:\Users\Decapp\Desktop\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache
+C:\Users\Decapp\Desktop\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.exe
+C:\Users\Decapp\Desktop\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.pdb
+C:\Users\Decapp\Desktop\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.beatParameter.resources
+C:\Users\Decapp\Desktop\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.rollParameter.resources
+C:\Users\Decapp\Desktop\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.csprojResolveAssemblyReference.cache
+D:\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.exe
+D:\Версия с несколькими билами_28.02.2016\App\App\bin\Debug\App.exe
+D:\Версия с несколькими билами_28.02.2016\App\App\bin\Debug\App.pdb
+D:\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.Animation.resources
+D:\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.Diagram.resources
+D:\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.Parameters.resources
+D:\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.Properties.Resources.resources
+D:\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.TestForm.resources
+D:\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.WorkForm.resources
+D:\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache
+D:\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.pdb
+D:\Версия с несколькими билами_28.02.2016\App\App\obj\x86\Debug\App.csprojResolveAssemblyReference.cache
+F:\Майоров\20.04.2016\App\App\obj\x86\Debug\App.exe
+F:\Майоров\20.04.2016\App\App\obj\x86\Debug\App.pdb
+F:\Майоров\20.04.2016\App\App\bin\Debug\App.exe
+F:\Майоров\20.04.2016\App\App\bin\Debug\App.pdb
+F:\Майоров\20.04.2016\App\App\obj\x86\Debug\App.csprojResolveAssemblyReference.cache
+F:\Майоров\20.04.2016\App\App\obj\x86\Debug\App.Animation.resources
+F:\Майоров\20.04.2016\App\App\obj\x86\Debug\App.Diagram.resources
+F:\Майоров\20.04.2016\App\App\obj\x86\Debug\App.Parameters.resources
+F:\Майоров\20.04.2016\App\App\obj\x86\Debug\App.Properties.Resources.resources
+F:\Майоров\20.04.2016\App\App\obj\x86\Debug\App.TestForm.resources
+F:\Майоров\20.04.2016\App\App\obj\x86\Debug\App.WorkForm.resources
+F:\Майоров\20.04.2016\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache
+C:\Users\Decapp\Desktop\20.04.2016\App\App\obj\x86\Debug\App.exe
+C:\Users\Decapp\Desktop\20.04.2016\App\App\obj\x86\Debug\App.pdb
+C:\Users\Decapp\Desktop\20.04.2016\App\App\bin\Debug\App.exe
+C:\Users\Decapp\Desktop\20.04.2016\App\App\bin\Debug\App.pdb
+C:\Users\Decapp\Desktop\20.04.2016\App\App\obj\x86\Debug\App.csprojResolveAssemblyReference.cache
+C:\Users\Decapp\Desktop\20.04.2016\App\App\obj\x86\Debug\App.Animation.resources
+C:\Users\Decapp\Desktop\20.04.2016\App\App\obj\x86\Debug\App.Diagram.resources
+C:\Users\Decapp\Desktop\20.04.2016\App\App\obj\x86\Debug\App.Parameters.resources
+C:\Users\Decapp\Desktop\20.04.2016\App\App\obj\x86\Debug\App.Properties.Resources.resources
+C:\Users\Decapp\Desktop\20.04.2016\App\App\obj\x86\Debug\App.TestForm.resources
+C:\Users\Decapp\Desktop\20.04.2016\App\App\obj\x86\Debug\App.WorkForm.resources
+C:\Users\Decapp\Desktop\20.04.2016\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache
+C:\Users\Decapp\Desktop\11.05.2016\App\App\obj\x86\Debug\App.exe
+C:\Users\Decapp\Desktop\11.05.2016\App\App\obj\x86\Debug\App.pdb
+C:\Users\Decapp\Desktop\11.05.2016 - копия\App\App\obj\x86\Debug\App.exe
+C:\Users\Decapp\Desktop\11.05.2016 - копия\App\App\obj\x86\Debug\App.pdb
+C:\Users\Decapp\Desktop\11.05.2016 - копия\App\App\bin\Debug\App.exe
+C:\Users\Decapp\Desktop\11.05.2016 - копия\App\App\bin\Debug\App.pdb
+C:\Users\Decapp\Desktop\11.05.2016 - копия\App\App\obj\x86\Debug\App.csprojResolveAssemblyReference.cache
+C:\Users\Decapp\Desktop\11.05.2016 - копия\App\App\obj\x86\Debug\App.Animation.resources
+C:\Users\Decapp\Desktop\11.05.2016 - копия\App\App\obj\x86\Debug\App.Diagram.resources
+C:\Users\Decapp\Desktop\11.05.2016 - копия\App\App\obj\x86\Debug\App.Parameters.resources
+C:\Users\Decapp\Desktop\11.05.2016 - копия\App\App\obj\x86\Debug\App.Properties.Resources.resources
+C:\Users\Decapp\Desktop\11.05.2016 - копия\App\App\obj\x86\Debug\App.TestForm.resources
+C:\Users\Decapp\Desktop\11.05.2016 - копия\App\App\obj\x86\Debug\App.WorkForm.resources
+C:\Users\Decapp\Desktop\11.05.2016 - копия\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache
+D:\Учеба\Дипломная работа\Новая папка\11.05.2016 - копия\App\App\obj\x86\Debug\App.exe
+D:\Учеба\Дипломная работа\Новая папка\11.05.2016 - копия\App\App\obj\x86\Debug\App.pdb
+D:\Учеба\Дипломная работа\Новая папка\11.05.2016 - копия\App\App\bin\Debug\App.exe
+D:\Учеба\Дипломная работа\Новая папка\11.05.2016 - копия\App\App\bin\Debug\App.pdb
+D:\Учеба\Дипломная работа\Новая папка\11.05.2016 - копия\App\App\obj\x86\Debug\App.csprojResolveAssemblyReference.cache
+D:\Учеба\Дипломная работа\Новая папка\11.05.2016 - копия\App\App\obj\x86\Debug\App.Animation.resources
+D:\Учеба\Дипломная работа\Новая папка\11.05.2016 - копия\App\App\obj\x86\Debug\App.Diagram.resources
+D:\Учеба\Дипломная работа\Новая папка\11.05.2016 - копия\App\App\obj\x86\Debug\App.Parameters.resources
+D:\Учеба\Дипломная работа\Новая папка\11.05.2016 - копия\App\App\obj\x86\Debug\App.Properties.Resources.resources
+D:\Учеба\Дипломная работа\Новая папка\11.05.2016 - копия\App\App\obj\x86\Debug\App.TestForm.resources
+D:\Учеба\Дипломная работа\Новая папка\11.05.2016 - копия\App\App\obj\x86\Debug\App.WorkForm.resources
+D:\Учеба\Дипломная работа\Новая папка\11.05.2016 - копия\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache
+D:\Учеба\Дипломная работа\Новая папка\20.05.2016 - Сравнение натяжения, запись в Excel\App\App\obj\x86\Debug\App.exe
+D:\Учеба\Дипломная работа\Новая папка\20.05.2016 - Сравнение натяжения, запись в Excel\App\App\obj\x86\Debug\App.pdb
+D:\Учеба\Дипломная работа\Новая папка\20.05.2016 - Сравнение натяжения, запись в Excel\App\App\obj\x86\Debug\App.Animation.resources
+D:\Учеба\Дипломная работа\Новая папка\20.05.2016 - Сравнение натяжения, запись в Excel\App\App\obj\x86\Debug\App.Diagram.resources
+D:\Учеба\Дипломная работа\Новая папка\20.05.2016 - Сравнение натяжения, запись в Excel\App\App\obj\x86\Debug\App.Parameters.resources
+D:\Учеба\Дипломная работа\Новая папка\20.05.2016 - Сравнение натяжения, запись в Excel\App\App\obj\x86\Debug\App.Properties.Resources.resources
+D:\Учеба\Дипломная работа\Новая папка\20.05.2016 - Сравнение натяжения, запись в Excel\App\App\obj\x86\Debug\App.TestForm.resources
+D:\Учеба\Дипломная работа\Новая папка\20.05.2016 - Сравнение натяжения, запись в Excel\App\App\obj\x86\Debug\App.WorkForm.resources
+D:\Учеба\Дипломная работа\Новая папка\20.05.2016 - Сравнение натяжения, запись в Excel\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache
+D:\Учеба\Дипломная работа\Новая папка\20.05.2016 - Сравнение натяжения, запись в Excel\App\App\bin\Debug\App.exe
+D:\Учеба\Дипломная работа\Новая папка\20.05.2016 - Сравнение натяжения, запись в Excel\App\App\bin\Debug\App.pdb
+D:\Учеба\Дипломная работа\Новая папка\20.05.2016 - Сравнение натяжения, запись в Excel\App\App\obj\x86\Debug\App.csprojResolveAssemblyReference.cache
+D:\Учеба\Дипломная работа\Новая папка\21.05.2016\App\App\obj\x86\Debug\App.exe
+D:\Учеба\Дипломная работа\Новая папка\21.05.2016\App\App\obj\x86\Debug\App.pdb
+D:\Учеба\Дипломная работа\Новая папка\21.05.2016\App\App\bin\Debug\App.exe
+D:\Учеба\Дипломная работа\Новая папка\21.05.2016\App\App\bin\Debug\App.pdb
+D:\Учеба\Дипломная работа\Новая папка\21.05.2016\App\App\obj\x86\Debug\App.Animation.resources
+D:\Учеба\Дипломная работа\Новая папка\21.05.2016\App\App\obj\x86\Debug\App.Diagram.resources
+D:\Учеба\Дипломная работа\Новая папка\21.05.2016\App\App\obj\x86\Debug\App.Parameters.resources
+D:\Учеба\Дипломная работа\Новая папка\21.05.2016\App\App\obj\x86\Debug\App.Properties.Resources.resources
+D:\Учеба\Дипломная работа\Новая папка\21.05.2016\App\App\obj\x86\Debug\App.TestForm.resources
+D:\Учеба\Дипломная работа\Новая папка\21.05.2016\App\App\obj\x86\Debug\App.WorkForm.resources
+D:\Учеба\Дипломная работа\Новая папка\21.05.2016\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016\App\App\obj\x86\Debug\App.exe
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016\App\App\obj\x86\Debug\App.pdb
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016\App\App\bin\Debug\App.exe
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016\App\App\bin\Debug\App.pdb
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016\App\App\obj\x86\Debug\App.Animation.resources
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016\App\App\obj\x86\Debug\App.Diagram.resources
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016\App\App\obj\x86\Debug\App.Parameters.resources
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016\App\App\obj\x86\Debug\App.Properties.Resources.resources
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016\App\App\obj\x86\Debug\App.TestForm.resources
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016\App\App\obj\x86\Debug\App.WorkForm.resources
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016 - Запись результатов в Excel\App\App\obj\x86\Debug\App.exe
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016 - Запись результатов в Excel\App\App\obj\x86\Debug\App.pdb
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016 - Запись результатов в Excel\App\App\bin\Debug\App.exe
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016 - Запись результатов в Excel\App\App\bin\Debug\App.pdb
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016 - Запись результатов в Excel\App\App\obj\x86\Debug\App.Animation.resources
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016 - Запись результатов в Excel\App\App\obj\x86\Debug\App.Diagram.resources
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016 - Запись результатов в Excel\App\App\obj\x86\Debug\App.Parameters.resources
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016 - Запись результатов в Excel\App\App\obj\x86\Debug\App.Properties.Resources.resources
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016 - Запись результатов в Excel\App\App\obj\x86\Debug\App.TestForm.resources
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016 - Запись результатов в Excel\App\App\obj\x86\Debug\App.WorkForm.resources
+D:\Учеба\Дипломная работа\Новая папка\24.05.2016 - Запись результатов в Excel\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache
+D:\Учеба\Дипломная работа\Новая папка\25.05.2016 - Исправление распределения масс\App\App\obj\x86\Debug\App.exe
+D:\Учеба\Дипломная работа\Новая папка\25.05.2016 - Исправление распределения масс\App\App\obj\x86\Debug\App.pdb
+D:\Учеба\Дипломная работа\Новая папка\25.05.2016 - Исправление распределения масс\App\App\bin\Debug\App.exe
+D:\Учеба\Дипломная работа\Новая папка\25.05.2016 - Исправление распределения масс\App\App\bin\Debug\App.pdb
+D:\Учеба\Дипломная работа\Новая папка\25.05.2016 - Исправление распределения масс\App\App\obj\x86\Debug\App.Animation.resources
+D:\Учеба\Дипломная работа\Новая папка\25.05.2016 - Исправление распределения масс\App\App\obj\x86\Debug\App.Diagram.resources
+D:\Учеба\Дипломная работа\Новая папка\25.05.2016 - Исправление распределения масс\App\App\obj\x86\Debug\App.Parameters.resources
+D:\Учеба\Дипломная работа\Новая папка\25.05.2016 - Исправление распределения масс\App\App\obj\x86\Debug\App.Properties.Resources.resources
+D:\Учеба\Дипломная работа\Новая папка\25.05.2016 - Исправление распределения масс\App\App\obj\x86\Debug\App.TestForm.resources
+D:\Учеба\Дипломная работа\Новая папка\25.05.2016 - Исправление распределения масс\App\App\obj\x86\Debug\App.WorkForm.resources
+D:\Учеба\Дипломная работа\Новая папка\25.05.2016 - Исправление распределения масс\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache
+D:\Учеба\Дипломная работа\Новая папка\27.05.2016 - Запись результата в Excel\App\App\obj\x86\Debug\App.exe
+D:\Учеба\Дипломная работа\Новая папка\27.05.2016 - Запись результата в Excel\App\App\obj\x86\Debug\App.pdb
+D:\Учеба\Дипломная работа\Новая папка\27.05.2016 - Запись результата в Excel\App\App\obj\x86\Debug\App.Animation.resources
+D:\Учеба\Дипломная работа\Новая папка\27.05.2016 - Запись результата в Excel\App\App\obj\x86\Debug\App.Diagram.resources
+D:\Учеба\Дипломная работа\Новая папка\27.05.2016 - Запись результата в Excel\App\App\obj\x86\Debug\App.Parameters.resources
+D:\Учеба\Дипломная работа\Новая папка\27.05.2016 - Запись результата в Excel\App\App\obj\x86\Debug\App.Properties.Resources.resources
+D:\Учеба\Дипломная работа\Новая папка\27.05.2016 - Запись результата в Excel\App\App\obj\x86\Debug\App.TestForm.resources
+D:\Учеба\Дипломная работа\Новая папка\27.05.2016 - Запись результата в Excel\App\App\obj\x86\Debug\App.WorkForm.resources
+D:\Учеба\Дипломная работа\Новая папка\27.05.2016 - Запись результата в Excel\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache
+D:\Учеба\Дипломная работа\Новая папка\27.05.2016 - Запись результата в Excel\App\App\bin\Debug\App.exe
+D:\Учеба\Дипломная работа\Новая папка\27.05.2016 - Запись результата в Excel\App\App\bin\Debug\App.pdb

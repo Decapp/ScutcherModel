@@ -34,8 +34,8 @@ namespace App
 
         bool error;
 
-        double f1; ///Коэффициент трения
-        double K; ///Коэффициент сопротивления среды
+        double f1; ///Коэффициент сопротивления среды
+        double K; ///Коэффициент трения
 
         dPoint[] prev; ///Массив точек в предыдущий момент времени
         dPoint[] now; ///Массив точек в текущий момент времени
@@ -54,7 +54,7 @@ namespace App
         public Yarn(double? _weight, double[] _weigthRasp, double _length, 
             double _topDiameter, double? _midDiameter, double? _botDiameter, double _youngModul,
             double _dt, int _pointCount, double _position, double _angle,
-            double _clampLength,double _beltDistance, double _offset, Beater[] beaters)
+            double _clampLength,double _beltDistance, double _offset, double _frict, double _windage, Beater[] beaters)
         {
             this.weight = _weight;
             this.weightRasp = _weigthRasp;
@@ -77,8 +77,8 @@ namespace App
             this.srF = 0;
             this.fCount = 0;
 
-            this.K = 0.05/10;
-            this.f1 = 0.000;
+            this.K = _windage;
+            this.f1 = _frict;
 
             c = 0.00000000002;
             

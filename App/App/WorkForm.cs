@@ -93,9 +93,6 @@ namespace App
             rezultArray = new double[parameters.yarnCount, 3];
 
             InitializeComponent();
-
-            //currentNumberYarn = 0;
-            //NextYarn(0);
         }
 
         //Запуск следующей нити
@@ -174,7 +171,8 @@ namespace App
                     parameters.threadMidDiameter, parameters.threadBotDiameter, 
                     parameters.threadYoungModul,parameters.dt, parameters.threadPointCount,
                     parameters.threadPosition, angleArray[(int)currentNumberYarn], parameters.clampLength,
-                    parameters.beltDistance, offsetArray[(int)currentNumberYarn], beaters);
+                    parameters.beltDistance, offsetArray[(int)currentNumberYarn],parameters.threadFriction,
+                    parameters.windage, beaters);
 
                 label1.Text = currentYarn.Length.ToString();
                 label2.Text = currentYarn.Kf.ToString();

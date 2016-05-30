@@ -13,62 +13,39 @@ namespace App
     {
         Bitmap mbit;
         Graphics graphics;
-            
-            Pen pen = new Pen(Color.Black, 1f);
-            Pen redPen = new Pen(Color.Red, 2f);
 
-            public Parameters()
-            {
-                InitializeComponent();
+        Pen pen = new Pen(Color.Black, 1f);
+        Pen redPen = new Pen(Color.Red, 2f);
 
-                PictureRefresh();
+        public Parameters()
+        {
+            InitializeComponent();
 
-                radioButton8.Checked = true;
-            }
+            PictureRefresh();
+
+            radioButton8.Checked = true;
+        }
 
 
         private void radioButton8_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton8.Checked)
             {
-                label32.Enabled = true;
-                textBox17.Enabled = true;
-                label31.Enabled = true;
-
-                label33.Enabled = false;
-                label34.Enabled = false;
-                label29.Enabled = false;
-                label30.Enabled = false;
-                label35.Enabled = false;
-                label38.Enabled = false;
-                label37.Enabled = false;
-                label36.Enabled = false;
-                label29.Enabled = false;
-
-                textBox24.Enabled = false;
-                textBox25.Enabled = false;
-                textBox26.Enabled = false;
-                textBox27.Enabled = false;
+                groupBox5.Enabled = true;
+                groupBox12.Enabled = false;
+                groupBox13.Enabled = false;
+            }
+            else if (radioButton2.Checked)
+            {
+                groupBox5.Enabled = false;
+                groupBox12.Enabled = true;
+                groupBox13.Enabled = false;
             }
             else
             {
-                label32.Enabled = false;
-                textBox17.Enabled = false;
-                label31.Enabled = false;
-
-                label33.Enabled = true;
-                label34.Enabled = true;
-                label29.Enabled = true;
-                label30.Enabled = true;
-                label35.Enabled = true;
-                label38.Enabled = true;
-                label37.Enabled = true;
-                label36.Enabled = true;
-
-                textBox24.Enabled = true;
-                textBox25.Enabled = true;
-                textBox26.Enabled = true;
-                textBox27.Enabled = true;
+                groupBox5.Enabled = false;
+                groupBox12.Enabled = false;
+                groupBox13.Enabled = true;
             }
         }
 
@@ -90,7 +67,7 @@ namespace App
             double threadBotDiameter = 0.0002;
 
             double threadFriction = 0.005;
-                
+
             double expectedValueOffset = 0.06;
             double varianceOffset = 0.06;
 
@@ -205,10 +182,10 @@ namespace App
             WorkForm owner = this.Owner as WorkForm;
             if (owner != null)
             {
-                ModelParameters p = new ModelParameters(threadWeight, threadWeigthRasp,expectedValueLength, 
-                    varianceLength, threadTopDiameter, threadMidDiameter, threadBotDiameter,threadYoungModul,
-                    threadPosition, threadFriction, expectedValueOffset,varianceOffset, expectedValueAngle, varianceAngle, 
-                    rollParameter, clampLength, beltDistance, dt,threadPointCount, yarnCount, windage, clampForce);
+                ModelParameters p = new ModelParameters(threadWeight, threadWeigthRasp, expectedValueLength,
+                    varianceLength, threadTopDiameter, threadMidDiameter, threadBotDiameter, threadYoungModul,
+                    threadPosition, threadFriction, expectedValueOffset, varianceOffset, expectedValueAngle, varianceAngle,
+                    rollParameter, clampLength, beltDistance, dt, threadPointCount, yarnCount, windage, clampForce);
 
                 owner.MParameters = p;
 
@@ -235,7 +212,7 @@ namespace App
             double startAngle1 = double.Parse(textBox7.Text);
             double startAngle2 = double.Parse(textBox35.Text);
 
-            double [,] rollParameter = new double[beatCount * 2, 6];
+            double[,] rollParameter = new double[beatCount * 2, 6];
 
             for (int i = 0; i < beatCount; i++)
             {
@@ -282,11 +259,11 @@ namespace App
 
                 pictureBox2.Image = mbit;
             }
-            catch 
+            catch
             {
                 MessageBox.Show("Ошибка переполнения");
             }
-        
+
         }
 
         private void textBox42_TextChanged(object sender, EventArgs e)

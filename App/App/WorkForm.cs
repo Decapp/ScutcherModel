@@ -166,16 +166,16 @@ namespace App
                         parameters.rollParameter[i, 4], (int)parameters.rollParameter[i, 5]);
                 }
 
-                currentYarn = new Yarn(parameters.threadWeight, parameters.threadWeightRasp,
+                currentYarn = new Yarn(parameters.threadWeightRasp,
                     lengthArray[(int)currentNumberYarn], parameters.threadTopDiameter,
                     parameters.threadMidDiameter, parameters.threadBotDiameter, 
                     parameters.threadYoungModul,parameters.dt, parameters.threadPointCount,
                     parameters.threadPosition, angleArray[(int)currentNumberYarn], parameters.clampLength,
                     parameters.beltDistance, offsetArray[(int)currentNumberYarn],parameters.threadFriction,
+                    parameters.threadHard,parameters.threadPlotn,parameters.weightLength,
                     parameters.windage, beaters);
 
                 label1.Text = currentYarn.Length.ToString();
-                label2.Text = currentYarn.Kf.ToString();
 
                 currentNumberYarn++;
                 

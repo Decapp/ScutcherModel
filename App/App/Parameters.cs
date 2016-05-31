@@ -49,143 +49,251 @@ namespace App
             }
         }
 
-
         private void button1_Click(object sender, EventArgs e)
         {
             //Нить
-            double? threadWeight = 0.001;
-            double[] threadWeigthRasp = { 0 };
+            double?[] threadWeigthRasp = { 0 };
 
-            double expectedValueLength = 0.6;
-            double varianceLength = 0.2;
+            double expectedValueLength = 0;
+            double varianceLength = 0;
 
-            double threadYoungModul = 2 * Math.Pow(10, 10);
-            double threadCrossSection = 314 * Math.Pow(10, -6);
-            double threadPosition = 0.5;
-            double threadTopDiameter = 0.0002;
-            double threadMidDiameter = 0.0002;
-            double threadBotDiameter = 0.0002;
+            double threadYoungModul = 0;
+            double threadPosition = 0;
+            double? threadTopDiameter = 0;
+            double? threadMidDiameter = 0;
+            double? threadBotDiameter = 0;
 
-            double threadFriction = 0.005;
+            double threadFriction = 0;
+            double threadHard = 0;
+            double? threadPlotn = 0;
 
-            double expectedValueOffset = 0.06;
-            double varianceOffset = 0.06;
+            double[] weightLength = new double[3];
+
+            double expectedValueOffset = 0;
+            double varianceOffset = 0;
 
             double expectedValueAngle = 0;
-            double varianceAngle = 45;
+            double varianceAngle = 0;
 
             int threadPointCount = 0;
 
             //Модель
-            int yarnCount = 10000;
-            double dt = Math.Pow(10, -5);
+            int yarnCount = 0;
+            double dt = 0;
             double windage = 0;
 
             //Барабаны
-            double[,] rollParameter;
+            double[,] rollParameter = new double[0, 0];
 
             //Зажим
-            double clampLength = 0.08;
-            double beltDistance = 0.14;
-            double clampForce;
+            double clampLength = 0;
+            double beltDistance = 0;
+            double clampForce = 0;
 
+
+            int beatCount = 0;
+
+            double startAngle1 = 0;
+            double startAngle2 = 0;
+
+
+            ///Изменение параметров
+
+            double a;
+            int b;
 
             ///Смещение
+        
+            if (double.TryParse(textBox9.Text, out a))
+                expectedValueOffset = a;
 
-            expectedValueOffset = double.Parse(textBox9.Text);
-            varianceOffset = double.Parse(textBox8.Text);
+            if (double.TryParse(textBox8.Text, out a))
+                varianceOffset = a;
+
 
             ///Угол дезориентации
 
-            expectedValueAngle = double.Parse(textBox13.Text);
-            varianceAngle = double.Parse(textBox12.Text);
+            if (double.TryParse(textBox13.Text, out a))
+                expectedValueAngle = a;
+
+            if (double.TryParse(textBox12.Text, out a))
+                varianceAngle = a;
+
 
             ///Длина пряди
 
-            expectedValueLength = double.Parse(textBox4.Text);
-            varianceLength = double.Parse(textBox5.Text);
+            if (double.TryParse(textBox4.Text, out a))
+                expectedValueLength = a;
+            
+            if (double.TryParse(textBox5.Text, out a))
+                varianceLength = a;
 
             ///Параметры пряди
 
-            threadYoungModul = double.Parse(textBox31.Text) * Math.Pow(10, 10);
-            threadPosition = double.Parse(textBox30.Text);
-            threadPointCount = int.Parse(textBox29.Text);
+            if (double.TryParse(textBox31.Text, out a))
+                threadYoungModul = a * Math.Pow(10, 10);
+            
+            if (double.TryParse(textBox30.Text, out a))
+                threadPosition = a;
+            
+            if (int.TryParse(textBox29.Text, out b))
+                threadPointCount = b;
 
-            threadTopDiameter = double.Parse(textBox1.Text);
-            threadMidDiameter = double.Parse(textBox1.Text);
-            threadBotDiameter = double.Parse(textBox1.Text);
+            if (double.TryParse(textBox11.Text, out a))
+                threadFriction = a;
+            
+            if (double.TryParse(textBox14.Text, out a))
+                threadHard = a;
+
+            if (double.TryParse(textBox41.Text, out a))
+                weightLength[0] = a;
+            
+            if (double.TryParse(textBox43.Text, out a))
+                weightLength[1] = a;
+           
+            if (double.TryParse(textBox44.Text, out a))
+                weightLength[2] = a;
 
 
             ///Параметры модели
 
-            dt = double.Parse(textBox2.Text) * Math.Pow(10, -7);
-            yarnCount = int.Parse(textBox16.Text);
+            if (double.TryParse(textBox2.Text, out a))
+                dt = a;
+            
+            if (int.TryParse(textBox16.Text, out b))
+                yarnCount = b;
+
+            if (double.TryParse(textBox10.Text, out a))
+                windage = a;
+
+
+
+
 
             ///Зажимной механизм
 
-            beltDistance = double.Parse(textBox6.Text);
-            clampLength = double.Parse(textBox15.Text);
+            if (double.TryParse(textBox15.Text, out a))
+                beltDistance = a;
+           
+            if (double.TryParse(textBox6.Text, out a))
+                clampLength = a;
+
+
+
+
 
             ///Барабаны
 
-            int beatCount = int.Parse(textBox40.Text);
+            if (int.TryParse(textBox40.Text, out b))
+                beatCount = b;
 
-            double startAngle1 = double.Parse(textBox7.Text);
-            double startAngle2 = double.Parse(textBox35.Text);
+            if (double.TryParse(textBox7.Text, out a))
+                startAngle1 = a;
+           
+            if (double.TryParse(textBox35.Text, out a))
+                startAngle2 = a;
+
+
 
             rollParameter = new double[beatCount * 2, 6];
 
             for (int i = 0; i < beatCount; i++)
             {
-                ///Левый барабан
+                try
+                {
+                    ///Левый барабан
 
-                rollParameter[i, 0] = double.Parse(textBox39.Text);
-                rollParameter[i, 1] = double.Parse(textBox3.Text);
-                rollParameter[i, 2] = double.Parse(textBox42.Text);
-                rollParameter[i, 3] = double.Parse(textBox38.Text) + double.Parse(textBox30.Text);
-                rollParameter[i, 4] = startAngle1 + (i + 1) * (360 / beatCount);
-                rollParameter[i, 5] = 1;
+                    rollParameter[i, 0] = double.Parse(textBox39.Text);
+                    rollParameter[i, 1] = double.Parse(textBox3.Text);
+                    rollParameter[i, 2] = double.Parse(textBox42.Text);
+                    rollParameter[i, 3] = double.Parse(textBox38.Text) + double.Parse(textBox30.Text);
+                    rollParameter[i, 4] = startAngle1 + (i + 1) * (360 / beatCount);
+                    rollParameter[i, 5] = 1;
 
-                ///Правый барабан
+                    ///Правый барабан
 
-                rollParameter[i + beatCount, 0] = double.Parse(textBox39.Text);
-                rollParameter[i + beatCount, 1] = double.Parse(textBox34.Text);
-                rollParameter[i + beatCount, 2] = double.Parse(textBox42.Text);
-                rollParameter[i + beatCount, 3] = double.Parse(textBox28.Text) + double.Parse(textBox30.Text);
-                rollParameter[i + beatCount, 4] = startAngle2 + (i + 1) * (360 / beatCount); ;
-                rollParameter[i + beatCount, 5] = -1;
+                    rollParameter[i + beatCount, 0] = double.Parse(textBox39.Text);
+                    rollParameter[i + beatCount, 1] = double.Parse(textBox34.Text);
+                    rollParameter[i + beatCount, 2] = double.Parse(textBox42.Text);
+                    rollParameter[i + beatCount, 3] = double.Parse(textBox28.Text) + double.Parse(textBox30.Text);
+                    rollParameter[i + beatCount, 4] = startAngle2 + (i + 1) * (360 / beatCount); ;
+                    rollParameter[i + beatCount, 5] = -1;
+                }
+                catch
+                {
+                    MessageBox.Show("Пожалуйста, проверьте параметры барабанов", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
+
 
             ///Масса нити
 
             if (radioButton8.Checked)
             {
-                threadWeight = double.Parse(textBox17.Text);
+
+                if (double.TryParse(textBox20.Text, out a))
+                    threadTopDiameter = a;
+
+                threadMidDiameter = null;
+                threadBotDiameter = null;
+                threadPlotn = null;
+                threadWeigthRasp = null;
+
+            }
+            else if (radioButton2.Checked)
+            {
+
+                if (double.TryParse(textBox1.Text, out a))
+                    threadTopDiameter = a;
+                
+                if (double.TryParse(textBox17.Text, out a))
+                    threadMidDiameter = a;
+                
+                if (double.TryParse(textBox19.Text, out a))
+                    threadBotDiameter = a;
+
+                if (double.TryParse(textBox21.Text, out a))
+                    threadPlotn = a;
+
+                threadWeigthRasp = null;
             }
             else
             {
-                threadWeight = null;
-
                 ///Распределение массы
 
-                threadWeigthRasp = new double[4];
+                threadWeigthRasp = new double?[4];
 
-                threadWeigthRasp[3] = double.Parse(textBox24.Text);
-                threadWeigthRasp[2] = double.Parse(textBox25.Text);
-                threadWeigthRasp[1] = double.Parse(textBox26.Text);
-                threadWeigthRasp[0] = double.Parse(textBox27.Text);
+                if (double.TryParse(textBox27.Text, out a))
+                    threadWeigthRasp[3] = a;
+                
+                if (double.TryParse(textBox26.Text, out a))
+                    threadWeigthRasp[2] = a;
+                
+                if (double.TryParse(textBox25.Text, out a))
+                    threadWeigthRasp[1] = a;
+                
+                if (double.TryParse(textBox24.Text, out a))
+                    threadWeigthRasp[0] = a;
             }
 
-            clampForce = double.Parse(textBox18.Text);
+
+
+
+
+            clampForce = 1;
+
+
+
 
 
             WorkForm owner = this.Owner as WorkForm;
             if (owner != null)
             {
-                ModelParameters p = new ModelParameters(threadWeight, threadWeigthRasp, expectedValueLength,
+                ModelParameters p = new ModelParameters(threadWeigthRasp, expectedValueLength,
                     varianceLength, threadTopDiameter, threadMidDiameter, threadBotDiameter, threadYoungModul,
-                    threadPosition, threadFriction, expectedValueOffset, varianceOffset, expectedValueAngle, varianceAngle,
-                    rollParameter, clampLength, beltDistance, dt, threadPointCount, yarnCount, windage, clampForce);
+                    threadPosition, threadFriction, threadHard, threadPlotn, expectedValueOffset, varianceOffset,
+                    expectedValueAngle, varianceAngle, rollParameter, clampLength, beltDistance, dt,
+                    threadPointCount, yarnCount, windage, clampForce, weightLength);
 
                 owner.MParameters = p;
 

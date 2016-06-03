@@ -278,3 +278,4 @@ D:\ScutcherModel\App\App\obj\x86\Debug\App.Properties.Resources.resources
 D:\ScutcherModel\App\App\obj\x86\Debug\App.TestForm.resources
 D:\ScutcherModel\App\App\obj\x86\Debug\App.WorkForm.resources
 D:\ScutcherModel\App\App\obj\x86\Debug\App.csproj.GenerateResource.Cache
+D:\ScutcherModel\App\App\obj\x86\Debug\App.csprojResolveAssemblyReference.cache

@@ -38,7 +38,7 @@ namespace App
             this.direction = _direction;
             this.hasTouch = false;
         }
-
+        
         public void Go(double dT)
         {
             this.angle += -1*direction*speed * (Math.PI / 30) * dT;

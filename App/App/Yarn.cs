@@ -52,6 +52,12 @@ namespace App
             double _clampLength,double _beltDistance, double _offset, double _frict, double _hard, double? _plotn,
             double[] _weightLength, double _windage, Beater[] beaters)
         {
+
+
+            Function();
+
+
+
             //this.weightRasp = _weigthRasp;
             this.length = _length;
             //this.topDiameter = _topDiameter;
@@ -536,6 +542,8 @@ namespace App
             pointWeight = new double[pointCount];
             pointCrossSection = new double[pointCount];
 
+
+
             if (topDiameter != null && midDiameter != null && botDiameter != null)
             {
 
@@ -624,6 +632,67 @@ namespace App
         //        return; 
         //    }
         //}
-       
+
+
+        public void Function()
+        {
+            double[] x = { 93, 78, 85, 73, 98, 79, 80, 92, 68, 87, 75, 77, 79, 58, 80 };
+            //double [] x={1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+            double[] y = { 0.256, 0.129, 0.310, 0.142, 0.313, 0.203, 0.155, 0.218, 0.111, 0.181, 0.163, 0.150, 0.167, 0.106, 0.146 };
+
+            double[,] a = new double[3, 3];
+            double[] b = new double[3];
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (i == 0 && j == 0)
+                    {
+                        a[i, j] = x.Length;
+                    }
+                    else
+                    {
+                        int k = i + j;
+
+                        for (int g = 0; g < x.Length; g++)
+                        {
+                            a[i, j] += Math.Pow(x[g], k);
+                        }
+                    }
+                }
+
+                for (int g = 0; g < x.Length; g++)
+                {
+                    b[i] += y[g] * Math.Pow(x[g], i);
+                }
+            }
+
+            double[] delta = new double[4];
+
+            delta[0] = a[0, 0] * a[1, 1] * a[2,2] + a[0, 1] * a[1, 2] * a[2, 0] +
+                a[1, 0] * a[2, 1] * a[0, 2] - a[0, 2] * a[1, 1] * a[2, 0] -
+                a[0, 1] * a[1, 0] * a[2, 2] - a[0, 0] * a[1, 2] * a[2, 1];
+
+            delta[1] = b[0] * a[1, 1] * a[2,2] + a[0, 1] * a[1, 2] * b[2] +
+                b[1] * a[2, 1] * a[0, 2] - a[0, 2] * a[1, 1] * b[2] -
+                a[0, 1] * b[1] * a[2, 2] - b[0] * a[1, 2] * a[2, 1];
+
+            delta[2] = a[0, 0] * b[1] * a[2,2] + b[0] * a[1, 2] * a[2, 0] +
+                a[1, 0] * b[2] * a[0, 2] - a[0, 2] * b[1] * a[2, 0] -
+                b[0] * a[1, 0] * a[2, 2] - a[0, 0] * a[1, 2] * b[2];
+
+            delta[3] = a[0, 0] * a[1, 1] * b[2] + a[0, 1] * b[1] * a[2, 0] +
+                a[1, 0] * a[2, 1] * b[0] - b[0] * a[1, 1] * a[2, 0] -
+                a[0, 1] * a[1, 0] * b[2] - a[0, 0] * b[1] * a[2, 1];
+
+            double a0 = delta[1] / delta[0];
+            double a1 = delta[2] / delta[0];
+            double a2 = delta[3] / delta[0];
+
+            int ghgijk = 0;
+        }
+
+
     }
 }

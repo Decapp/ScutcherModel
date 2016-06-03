@@ -26,7 +26,11 @@ namespace App
             radioButton8.Checked = true;
         }
 
-
+        /// <summary>
+        /// Изменение варианта распределения массы вдоль стебля
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radioButton8_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton8.Checked)
@@ -49,6 +53,11 @@ namespace App
             }
         }
 
+        /// <summary>
+        /// Кнопка "ОК" Сохранение параметров, переход к модели
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             //Нить
@@ -103,7 +112,7 @@ namespace App
             int b;
 
             ///Смещение
-        
+
             if (double.TryParse(textBox9.Text, out a))
                 expectedValueOffset = a;
 
@@ -124,7 +133,7 @@ namespace App
 
             if (double.TryParse(textBox4.Text, out a))
                 expectedValueLength = a;
-            
+
             if (double.TryParse(textBox5.Text, out a))
                 varianceLength = a;
 
@@ -132,25 +141,25 @@ namespace App
 
             if (double.TryParse(textBox31.Text, out a))
                 threadYoungModul = a * Math.Pow(10, 10);
-            
+
             if (double.TryParse(textBox30.Text, out a))
                 threadPosition = a;
-            
+
             if (int.TryParse(textBox29.Text, out b))
                 threadPointCount = b;
 
             if (double.TryParse(textBox11.Text, out a))
                 threadFriction = a;
-            
+
             if (double.TryParse(textBox14.Text, out a))
                 threadHard = a;
 
             if (double.TryParse(textBox41.Text, out a))
                 weightLength[0] = a;
-            
+
             if (double.TryParse(textBox43.Text, out a))
                 weightLength[1] = a;
-           
+
             if (double.TryParse(textBox44.Text, out a))
                 weightLength[2] = a;
 
@@ -159,7 +168,7 @@ namespace App
 
             if (double.TryParse(textBox2.Text, out a))
                 dt = a;
-            
+
             if (int.TryParse(textBox16.Text, out b))
                 yarnCount = b;
 
@@ -174,7 +183,7 @@ namespace App
 
             if (double.TryParse(textBox15.Text, out a))
                 beltDistance = a;
-           
+
             if (double.TryParse(textBox6.Text, out a))
                 clampLength = a;
 
@@ -189,7 +198,7 @@ namespace App
 
             if (double.TryParse(textBox7.Text, out a))
                 startAngle1 = a;
-           
+
             if (double.TryParse(textBox35.Text, out a))
                 startAngle2 = a;
 
@@ -245,10 +254,10 @@ namespace App
 
                 if (double.TryParse(textBox1.Text, out a))
                     threadTopDiameter = a;
-                
+
                 if (double.TryParse(textBox17.Text, out a))
                     threadMidDiameter = a;
-                
+
                 if (double.TryParse(textBox19.Text, out a))
                     threadBotDiameter = a;
 
@@ -265,13 +274,13 @@ namespace App
 
                 if (double.TryParse(textBox27.Text, out a))
                     threadWeigthRasp[3] = a;
-                
+
                 if (double.TryParse(textBox26.Text, out a))
                     threadWeigthRasp[2] = a;
-                
+
                 if (double.TryParse(textBox25.Text, out a))
                     threadWeigthRasp[1] = a;
-                
+
                 if (double.TryParse(textBox24.Text, out a))
                     threadWeigthRasp[0] = a;
             }
@@ -301,16 +310,19 @@ namespace App
             }
         }
 
+        /// <summary>
+        /// Кнопка "Отмена"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
             this.Owner.Close();
         }
 
-        private void Parameters_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Перерисовка бильных барабанов
+        /// </summary>
         private void PictureRefresh()
         {
             double k = 300;
@@ -371,12 +383,82 @@ namespace App
             {
                 MessageBox.Show("Ошибка переполнения");
             }
-
         }
 
+        /// <summary>
+        /// Изменение параметров била
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBox42_TextChanged(object sender, EventArgs e)
         {
             PictureRefresh();
+        }
+
+        /// <summary>
+        /// Вычисление коэффициентов функции зависимости массы от длины стебля
+        /// </summary>
+        public void WeightFunction()
+        {
+            double[] x = { 93, 78, 85, 73, 98, 79, 80, 92, 68, 87, 75, 77, 79, 58, 80 };
+
+            double[] y = { 0.256, 0.129, 0.310, 0.142, 0.313, 0.203, 0.155, 0.218, 0.111, 
+                             0.181, 0.163, 0.150, 0.167, 0.106, 0.146 };
+
+            double[,] a = new double[3, 3];
+            double[] b = new double[3];
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (i == 0 && j == 0)
+                    {
+                        a[i, j] = x.Length;
+                    }
+                    else
+                    {
+                        int k = i + j;
+
+                        for (int g = 0; g < x.Length; g++)
+                        {
+                            a[i, j] += Math.Pow(x[g], k);
+                        }
+                    }
+                }
+
+                for (int g = 0; g < x.Length; g++)
+                {
+                    b[i] += y[g] * Math.Pow(x[g], i);
+                }
+            }
+
+            double[] delta = new double[4];
+
+            delta[0] = a[0, 0] * a[1, 1] * a[2, 2] + a[0, 1] * a[1, 2] * a[2, 0] +
+                a[1, 0] * a[2, 1] * a[0, 2] - a[0, 2] * a[1, 1] * a[2, 0] -
+                a[0, 1] * a[1, 0] * a[2, 2] - a[0, 0] * a[1, 2] * a[2, 1];
+
+            delta[1] = b[0] * a[1, 1] * a[2, 2] + a[0, 1] * a[1, 2] * b[2] +
+                b[1] * a[2, 1] * a[0, 2] - a[0, 2] * a[1, 1] * b[2] -
+                a[0, 1] * b[1] * a[2, 2] - b[0] * a[1, 2] * a[2, 1];
+
+            delta[2] = a[0, 0] * b[1] * a[2, 2] + b[0] * a[1, 2] * a[2, 0] +
+                a[1, 0] * b[2] * a[0, 2] - a[0, 2] * b[1] * a[2, 0] -
+                b[0] * a[1, 0] * a[2, 2] - a[0, 0] * a[1, 2] * b[2];
+
+            delta[3] = a[0, 0] * a[1, 1] * b[2] + a[0, 1] * b[1] * a[2, 0] +
+                a[1, 0] * a[2, 1] * b[0] - b[0] * a[1, 1] * a[2, 0] -
+                a[0, 1] * a[1, 0] * b[2] - a[0, 0] * b[1] * a[2, 1];
+
+            double a0 = delta[1] / delta[0];
+            double a1 = delta[2] / delta[0];
+            double a2 = delta[3] / delta[0];
+
+            textBox41.Text = a0.ToString();
+            textBox43.Text = a1.ToString();
+            textBox44.Text = a2.ToString();
+
         }
     }
 }

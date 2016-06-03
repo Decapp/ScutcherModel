@@ -147,6 +147,11 @@
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.label78 = new System.Windows.Forms.Label();
+            this.label77 = new System.Windows.Forms.Label();
+            this.textBox18 = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label51 = new System.Windows.Forms.Label();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.textBox21 = new System.Windows.Forms.TextBox();
@@ -191,11 +196,6 @@
             this.label82 = new System.Windows.Forms.Label();
             this.textBox32 = new System.Windows.Forms.TextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.textBox18 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label51 = new System.Windows.Forms.Label();
-            this.label77 = new System.Windows.Forms.Label();
-            this.label78 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -1312,7 +1312,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(664, 449);
+            this.tabPage1.Size = new System.Drawing.Size(664, 459);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Параметры стебля";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -1336,6 +1336,7 @@
             // 
             this.textBox44.Location = new System.Drawing.Point(240, 29);
             this.textBox44.Name = "textBox44";
+            this.textBox44.ReadOnly = true;
             this.textBox44.Size = new System.Drawing.Size(78, 20);
             this.textBox44.TabIndex = 29;
             this.textBox44.Text = "0,146027";
@@ -1354,6 +1355,7 @@
             // 
             this.textBox43.Location = new System.Drawing.Point(127, 29);
             this.textBox43.Name = "textBox43";
+            this.textBox43.ReadOnly = true;
             this.textBox43.Size = new System.Drawing.Size(78, 20);
             this.textBox43.TabIndex = 26;
             this.textBox43.Text = "-0,005166";
@@ -1381,6 +1383,7 @@
             // 
             this.textBox41.Location = new System.Drawing.Point(17, 29);
             this.textBox41.Name = "textBox41";
+            this.textBox41.ReadOnly = true;
             this.textBox41.Size = new System.Drawing.Size(78, 20);
             this.textBox41.TabIndex = 23;
             this.textBox41.Text = "0,0000688";
@@ -1438,6 +1441,51 @@
             this.groupBox13.TabIndex = 62;
             this.groupBox13.TabStop = false;
             // 
+            // label78
+            // 
+            this.label78.AutoSize = true;
+            this.label78.Location = new System.Drawing.Point(480, 27);
+            this.label78.Name = "label78";
+            this.label78.Size = new System.Drawing.Size(13, 13);
+            this.label78.TabIndex = 69;
+            this.label78.Text = "0";
+            // 
+            // label77
+            // 
+            this.label77.AutoSize = true;
+            this.label77.Location = new System.Drawing.Point(524, 106);
+            this.label77.Name = "label77";
+            this.label77.Size = new System.Drawing.Size(37, 13);
+            this.label77.TabIndex = 68;
+            this.label77.Text = "кг/м3";
+            // 
+            // textBox18
+            // 
+            this.textBox18.Location = new System.Drawing.Point(452, 103);
+            this.textBox18.Name = "textBox18";
+            this.textBox18.Size = new System.Drawing.Size(66, 20);
+            this.textBox18.TabIndex = 64;
+            this.textBox18.Text = "500";
+            this.textBox18.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(441, 85);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(87, 13);
+            this.label8.TabIndex = 65;
+            this.label8.Text = "Плотность нити";
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(439, 106);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(13, 13);
+            this.label51.TabIndex = 67;
+            this.label51.Text = "p";
+            // 
             // pictureBox5
             // 
             this.pictureBox5.Image = global::App.Properties.Resources.weight3;
@@ -1473,7 +1521,7 @@
             // 
             // textBox21
             // 
-            this.textBox21.Location = new System.Drawing.Point(515, 37);
+            this.textBox21.Location = new System.Drawing.Point(508, 37);
             this.textBox21.Name = "textBox21";
             this.textBox21.Size = new System.Drawing.Size(66, 20);
             this.textBox21.TabIndex = 60;
@@ -1511,7 +1559,7 @@
             // label72
             // 
             this.label72.AutoSize = true;
-            this.label72.Location = new System.Drawing.Point(503, 15);
+            this.label72.Location = new System.Drawing.Point(496, 15);
             this.label72.Name = "label72";
             this.label72.Size = new System.Drawing.Size(87, 13);
             this.label72.TabIndex = 61;
@@ -1538,7 +1586,7 @@
             // label74
             // 
             this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(502, 40);
+            this.label74.Location = new System.Drawing.Point(495, 40);
             this.label74.Name = "label74";
             this.label74.Size = new System.Drawing.Size(13, 13);
             this.label74.TabIndex = 63;
@@ -1583,7 +1631,7 @@
             // label76
             // 
             this.label76.AutoSize = true;
-            this.label76.Location = new System.Drawing.Point(587, 40);
+            this.label76.Location = new System.Drawing.Point(580, 40);
             this.label76.Name = "label76";
             this.label76.Size = new System.Drawing.Size(37, 13);
             this.label76.TabIndex = 62;
@@ -1678,7 +1726,7 @@
             this.tabPage3.Controls.Add(this.groupBox7);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(664, 449);
+            this.tabPage3.Size = new System.Drawing.Size(664, 459);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Параметры барабанов";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1702,7 +1750,7 @@
             this.tabPage4.Controls.Add(this.groupBox2);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(664, 449);
+            this.tabPage4.Size = new System.Drawing.Size(664, 459);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Параметры зажимного механизма";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -1885,55 +1933,10 @@
             this.tabPage5.Controls.Add(this.groupBox11);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(664, 449);
+            this.tabPage5.Size = new System.Drawing.Size(664, 459);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Параметры модели";
             this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // textBox18
-            // 
-            this.textBox18.Location = new System.Drawing.Point(452, 103);
-            this.textBox18.Name = "textBox18";
-            this.textBox18.Size = new System.Drawing.Size(66, 20);
-            this.textBox18.TabIndex = 64;
-            this.textBox18.Text = "500";
-            this.textBox18.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(441, 85);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(87, 13);
-            this.label8.TabIndex = 65;
-            this.label8.Text = "Плотность нити";
-            // 
-            // label51
-            // 
-            this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(439, 106);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(13, 13);
-            this.label51.TabIndex = 67;
-            this.label51.Text = "p";
-            // 
-            // label77
-            // 
-            this.label77.AutoSize = true;
-            this.label77.Location = new System.Drawing.Point(524, 106);
-            this.label77.Name = "label77";
-            this.label77.Size = new System.Drawing.Size(37, 13);
-            this.label77.TabIndex = 68;
-            this.label77.Text = "кг/м3";
-            // 
-            // label78
-            // 
-            this.label78.AutoSize = true;
-            this.label78.Location = new System.Drawing.Point(480, 27);
-            this.label78.Name = "label78";
-            this.label78.Size = new System.Drawing.Size(13, 13);
-            this.label78.TabIndex = 69;
-            this.label78.Text = "0";
             // 
             // Parameters
             // 
@@ -1946,7 +1949,6 @@
             this.Controls.Add(this.button1);
             this.Name = "Parameters";
             this.Text = "Parameters";
-            this.Load += new System.EventHandler(this.Parameters_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);

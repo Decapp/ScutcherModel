@@ -8,44 +8,47 @@ namespace App
 {
     public class Beater
     {
-        double speed;
-        double heigth;
-        double length;
-        double xPosition;
-        double angle;
-        double startAngle;
+        double speed; ///Скорость вращения
+        double length; ///Длина планки
+        double angle; ///Угол поворота
+        double startAngle; ///Начальный угол
 
-        int direction; ///-1 - влево, 1 - вправо
+        int direction; ///Направление движения
+                       ///-1 - влево, 1 - вправо
 
-        int lastPoint;
+        int lastPoint; ///Последняя точка нити, контактирующая с бильной планкой
+        bool hasTouch; ///Имеется ли контакт с нитью
+        bool circlePassed; ///Пройден ли оборот
 
-        bool hasTouch;
-        bool circlePassed;
+        dPoint center; ///Центр бильного барабана
 
-        dPoint center;
-
-        public Beater(double _speed, double _heigth, double _length, double _xPosition, double _angle, int _direction)
+        public Beater(double _speed, double _yPosition, double _length, double _xPosition, double _angle, int _direction)
         {
             this.speed = _speed;
-            this.heigth = _heigth;
             this.length = _length;
-            this.xPosition = _xPosition;
             this.angle = _angle * (Math.PI / 180);
             this.startAngle = this.angle;
-
-            this.center = new dPoint(xPosition, heigth);
+            this.center = new dPoint(_xPosition, _yPosition);
             this.lastPoint = -1;
             this.direction = _direction;
             this.hasTouch = false;
         }
-        
+
+        /// <summary>
+        /// Движение бильной планки по окружности
+        /// </summary>
+        /// <param name="dT">Промежуток времени</param>
         public void Go(double dT)
         {
-            this.angle += -1*direction*speed * (Math.PI / 30) * dT;
-            if (angle > startAngle + 2*Math.PI)
-            { circlePassed = true; }
+            this.angle += -1 * direction * speed * (Math.PI / 30) * dT;
+            
+            if (angle > startAngle + 2 * Math.PI)
+                circlePassed = true;
         }
 
+        /// <summary>
+        /// Точка на конце бильной планки
+        /// </summary>
         public dPoint Edge
         {
             get 
@@ -56,28 +59,24 @@ namespace App
                 return _p;
             }
         }
-
+       
         public dPoint Center
         {
             get { return center; }
         }
-
         public double Angle
         {
             get { return angle; }
         }
-
         public double Radius
         {
             get { return length; }
         }
-
         public int LastPoint
         {
             get { return lastPoint; }
             set { this.lastPoint = value; }
         }
-
         public bool HasTouch
         {
             get { return hasTouch; }

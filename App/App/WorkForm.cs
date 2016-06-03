@@ -15,24 +15,24 @@ namespace App
     public partial class WorkForm : Form
     {
 
-        Yarn currentYarn;
-        int currentNumberYarn;
+        Yarn currentYarn; ///Текущий стебель
+        int currentNumberYarn; ///Номер текущего стебля
 
-        Beater[] beaters;
+        Beater[] beaters; ///Бильные планки
 
         Random rnd;
 
-        ModelParameters parameters;
+        ModelParameters parameters; ///Параметры модели
 
-        Excel.Application application;
+        Excel.Application application; ///Приложение Excel (Для вывода данных)
 
-        double[] lengthArray;
-        double[] offsetArray;
-        double[] angleArray;
+        double[] lengthArray; ///Массив длин
+        double[] offsetArray; ///Массив смещений
+        double[] angleArray; ///Массив углов дезориентации
 
-        double Time;
+        double Time; ///Время работы модели
 
-        double[,] rezultArray;
+        double[,] rezultArray; ///Массив с результатами
 
 
         public WorkForm()
@@ -95,8 +95,9 @@ namespace App
             InitializeComponent();
         }
 
-        //Запуск следующей нити
-
+        /// <summary>
+        /// Запуск следующей нити
+        /// </summary>
         private void NextYarn()
         {
             ///Тут должны быть расчеты
@@ -172,7 +173,7 @@ namespace App
                     parameters.threadYoungModul,parameters.dt, parameters.threadPointCount,
                     parameters.threadPosition, angleArray[(int)currentNumberYarn], parameters.clampLength,
                     parameters.beltDistance, offsetArray[(int)currentNumberYarn],parameters.threadFriction,
-                    parameters.threadHard,parameters.threadPlotn,parameters.weightLength,
+                    parameters.threadHard,parameters.threadDensity,parameters.weightLength,
                     parameters.windage, beaters);
 
                 label1.Text = currentYarn.Length.ToString();
@@ -183,8 +184,11 @@ namespace App
             }
         }
 
-        //Кнопка старт-пауза
-
+        /// <summary>
+        /// Кнопка "Старт-Пауза"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             if (currentNumberYarn == 0)
@@ -208,8 +212,11 @@ namespace App
             }
         }
 
-        //Основной таймер - работа модели
-
+        /// <summary>
+        /// Основной таймер
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void timer1_Tick(object sender, EventArgs e)
         {
             bool stop = false;
@@ -262,14 +269,12 @@ namespace App
             }
         }
 
-        private void генерацияToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            TestForm sf = new TestForm();
-            sf.Show();
-        }
-
-        //Генерация нормально распределенной величины
-
+        /// <summary>
+        /// Генерация нормально распределенного числа
+        /// </summary>
+        /// <param name="expectedValue">Математическое ожидание</param>
+        /// <param name="variance">Дисперсия</param>
+        /// <returns>Возвращает нормально распределенное число</returns>
         private double genNormNumber(double expectedValue, double variance)
         {
             double number = 0;
@@ -290,8 +295,9 @@ namespace App
             return x;
         }
 
-        //Запись результата в Excel
-
+        /// <summary>
+        /// Запись результатов в Excel
+        /// </summary>
         private void WriteRezult()
         {
             application = new Excel.Application();
@@ -441,6 +447,11 @@ namespace App
             set { parameters = value; }
         }
 
+        /// <summary>
+        /// Таймер на время работы модели
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void timer2_Tick(object sender, EventArgs e)
         {
             Time++;

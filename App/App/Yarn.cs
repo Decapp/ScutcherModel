@@ -9,39 +9,35 @@ namespace App
 {
     class Yarn
     {
-        double length;
-        double hiddenLength;
+        double length; ///Длина нити ниже зажима
+        double hiddenLength; ///Длина нити в зажиме
 
-        double position;
-        double youngModul;
-        double dT;
-        double step;
-        double y_end;
+        double position; ///Положение (По оси X, по оси Y = 0)
+        double youngModul; ///Модуль Юнга
+        double dT; ///Промежуток времени
+        double step; ///Текущий шаг
+        double y_end; ///Координата конца нити в зажиме
 
-        int pointCount;
+        int pointCount; ///Количество точек
 
         double maxF; ///Максимальная сила натяжения
-        double minF;
+        double minF; ///Минимальная сила натяжения
 
         double srF; ///Среднее значение силы натяжения
-        int fCount;
+        int fCount; ///Количество моментов времени, для подсчета усредненной силы натяжения
 
-        bool error;
+        bool error; ///Имеется ли ошибка
 
-        double f1; ///Коэффициент сопротивления среды
-        double K; ///Коэффициент трения
+        double frict; ///Коэффициент трения
+        double windage; ///Коэффициент сопротивления среды
 
         dPoint[] prev; ///Массив точек в предыдущий момент времени
         dPoint[] now; ///Массив точек в текущий момент времени
 
-        //double[] weightRasp; ///Коэффициенты распределения массы
-                             
-        //double kf; ///Коэффициент массы
+        double hard; ///Коэффициент изгибной жесткости
 
-        double c; ///Коэффициент изгибной жесткости
-
-        double[] pointWeight;
-        double[] pointCrossSection;
+        double[] pointWeight; ///Массив масс точек
+        double[] pointCrossSection; ///Массив с площадью поперечного сечения в каждой точке
 
         double bendRadius;
 
@@ -52,42 +48,27 @@ namespace App
             double _clampLength,double _beltDistance, double _offset, double _frict, double _hard, double? _plotn,
             double[] _weightLength, double _windage, Beater[] beaters)
         {
-
-
-            Function();
-
-
-
-            //this.weightRasp = _weigthRasp;
             this.length = _length;
-            //this.topDiameter = _topDiameter;
-            //this.midDiameter = _midDiameter;
-            //this.botDiameter = _botDiameter;
             this.youngModul = _youngModul;
-
-            //this.cross_section = Math.PI*Math.Pow(_topDiameter,2)/4;
-
             this.dT = _dt;
             this.step = 0;
             this.pointCount = _pointCount;
             this.position = _position;
+            this.windage = _windage;
+            this.frict = _frict;
+            this.hard = _hard;
 
             this.prev = new dPoint[pointCount];
             this.now = new dPoint[pointCount];
 
             this.srF = 0;
             this.fCount = 0;
-
-            this.K = _windage;
-            this.f1 = _frict;
-
-            c = _hard;
-            
             this.maxF = 0;
             this.minF = 0;
 
             this.error = false;
             
+
             ///Определение координаты положения нити в зажиме
 
             double cos = Math.Cos(_angle * Math.PI / 180);
@@ -96,9 +77,7 @@ namespace App
             this.length = _length - y_end; ///Длина свисающей части
             this.hiddenLength = _length - this.length; ///Длина части в зажиме
 
-            
-
-            #region Смещение
+            #region Начальное положение нити по окружности
             
             double l = beaters[beaters.Length - 1].Center.X - _position;
             double h = beaters[beaters.Length - 1].Center.Y;
@@ -130,24 +109,16 @@ namespace App
 
 
             ///Задание масс и поперечных сечений
-            ///
-
 
             PointsParameters(_topDiameter,_midDiameter,_botDiameter,_plotn,_weigthRasp, _weightLength);
-
-
         }
 
+        /// <summary>
+        /// Основная функция модели, определяет положения точек нити в следующий момент времени
+        /// </summary>
+        /// <param name="beaters">Параметры бильных планок</param>
         public void Next(Beater[] beaters)
         {
-
-
-
-            ///Считать pointWeight один раз!!
-
-
-
-
             step++;
 
             dPoint[] next = new dPoint[pointCount];
@@ -224,6 +195,7 @@ namespace App
 
             for (int i = 0; i < beaters.Length; i++)
                 beaters[i].HasTouch = false;
+
 
             for (int i = 0; i < pointCount; i++)
             {
@@ -311,27 +283,25 @@ namespace App
 
                     alpha -= alpha_prev;
 
-                    double M1 = c * alpha_prev;
-                    double M2 = c * alpha;
+                    double M1 = hard * alpha_prev;
+                    double M2 = hard * alpha;
 
                     double F1, F2;
 
                     F1 = M1 / l_prev;
                     F2 = M2 / Math.Pow(Math.Pow((Xb - now[i].X), 2) / Math.Pow((Yb - now[i].Y), 2), 0.5);
 
-                    //F1 = 0;
-                    //F2 = 0;
 
                     x = 2 * now[i].X - prev[i].X + (Math.Pow(dT, 2) / pointWeight[i]) *
                         ((youngModul * pointCrossSection[i] * (l_prev / l0 - 1) * (now[i - 1].X - now[i].X) / l_prev) +
-                        (youngModul * pointCrossSection[i] * (l_str / l0 - 1) * cos) * Math.Pow(Math.E, f1 * angle)
-                       - K * ((now[i].X - prev[i].X) / dT))
+                        (youngModul * pointCrossSection[i] * (l_str / l0 - 1) * cos) * Math.Pow(Math.E, frict * angle)
+                       - windage * ((now[i].X - prev[i].X) / dT))
                        + F2 * Math.Cos(alpha) - F1 * Math.Cos(alpha_prev);
 
                     y = 2 * now[i].Y - prev[i].Y + (Math.Pow(dT, 2) / pointWeight[i]) *
                         ((youngModul * pointCrossSection[i] * (l_prev / l0 - 1) * (now[i - 1].Y - now[i].Y) / l_prev) +
-                        (youngModul * pointCrossSection[i] * (l_str / l0 - 1) * sin) * Math.Pow(Math.E, f1 * angle)
-                        - K * ((now[i].Y - prev[i].Y) / dT))
+                        (youngModul * pointCrossSection[i] * (l_str / l0 - 1) * sin) * Math.Pow(Math.E, frict * angle)
+                        - windage * ((now[i].Y - prev[i].Y) / dT))
                         + F2 * Math.Sin(alpha) - F1 * Math.Sin(alpha_prev);
 
 
@@ -353,23 +323,19 @@ namespace App
 
                     alpha -= alpha_prev;
 
-                    M1 = c * alpha_prev;
-                    M2 = c * alpha;
+                    M1 = hard * alpha_prev;
+                    M2 = hard * alpha;
 
                     F1 = M1 / Math.Pow(Math.Pow((Xb - now[i].X), 2) / Math.Pow((Yb - now[i].Y), 2), 0.5);
                     F2 = M2 / l_next;
 
 
-                    //F1 = 0;
-                    //F2 = 0;
-
-
                     x = 2 * now[i + 1].X - prev[i + 1].X + (Math.Pow(dT, 2) / pointWeight[i]) *
-                        ((youngModul * pointCrossSection[i] * (l_str / l0 - 1) * cos) - K * ((now[i + 1].X - prev[i + 1].X) / dT))
+                        ((youngModul * pointCrossSection[i] * (l_str / l0 - 1) * cos) - windage * ((now[i + 1].X - prev[i + 1].X) / dT))
                         +F2 * Math.Cos(alpha) - F1 * Math.Cos(alpha_prev);
 
                     y = 2 * now[i + 1].Y - prev[i + 1].Y + (Math.Pow(dT, 2) / pointWeight[i]) *
-                        ((youngModul * pointCrossSection[i] * (l_str / l0 - 1) * sin) - K * ((now[i + 1].Y - prev[i + 1].Y) / dT))
+                        ((youngModul * pointCrossSection[i] * (l_str / l0 - 1) * sin) - windage * ((now[i + 1].Y - prev[i + 1].Y) / dT))
                         +F2 * Math.Sin(alpha) - F1 * Math.Sin(alpha_prev);
 
 
@@ -406,24 +372,20 @@ namespace App
 
                         alpha -= alpha_prev;
 
-                        double M = c * alpha;
-
+                        double M = hard * alpha;
                         double F1;
 
                         F1 = M / l_prev;
 
-                        //F1 = 0;
-
-                        //double F1 = 0,  alpha_prev = 0;
 
                         x = 2 * now[i].X - prev[i].X + (Math.Pow(dT, 2) / pointWeight[i]) *
                            ((youngModul * pointCrossSection[i] * (l_prev - l0) * (now[i - 1].X - now[i].X) / (l0 * l_prev))
-                           - K * ((now[i].X - prev[i].X) / dT))
+                           - windage * ((now[i].X - prev[i].X) / dT))
                            - F1 * Math.Cos(alpha_prev);
 
                         y = 2 * now[i].Y - prev[i].Y + (Math.Pow(dT, 2) / pointWeight[i]) *
                             ((youngModul * pointCrossSection[i] * (l_prev - l0) * (now[i - 1].Y - now[i].Y) / (l0 * l_prev))
-                           - K * ((now[i].Y - prev[i].Y) / dT))
+                           - windage * ((now[i].Y - prev[i].Y) / dT))
                            - F1 * Math.Sin(alpha_prev);
 
                     }
@@ -436,8 +398,8 @@ namespace App
 
                         alpha -= alpha_prev;
 
-                        double M1 = c * alpha_prev;
-                        double M2 = c * alpha;
+                        double M1 = hard * alpha_prev;
+                        double M2 = hard * alpha;
 
                         double F1, F2;
 
@@ -445,24 +407,17 @@ namespace App
                         F2 = M2 / l_prev;
 
 
-                        //F1 = 0;
-                        //F2 = 0;
-
-                        //double F1 = 0, F2 = 0, alpha = 0, alpha_prev = 0;
-
                         x = 2 * now[i].X - prev[i].X + (Math.Pow(dT, 2) / pointWeight[i]) *
                             ((youngModul * pointCrossSection[i] * (l_prev - l0) * (now[i - 1].X - now[i].X) / (l0 * l_prev)) +
                             (youngModul * pointCrossSection[i] * (l_next - l0) * (now[i + 1].X - now[i].X) / (l0 * l_next))
-                            - K * ((now[i].X - prev[i].X) / dT))
+                            - windage * ((now[i].X - prev[i].X) / dT))
                             + F2 * Math.Cos(alpha) - F1 * Math.Cos(alpha_prev);
 
                         y = 2 * now[i].Y - prev[i].Y + (Math.Pow(dT, 2) / pointWeight[i]) *
                             ((youngModul * pointCrossSection[i] * (l_prev - l0) * (now[i - 1].Y - now[i].Y) / (l0 * l_prev)) +
                             (youngModul * pointCrossSection[i] * (l_next - l0) * (now[i + 1].Y - now[i].Y) / (l0 * l_next))
-                            - K * ((now[i].Y - prev[i].Y) / dT))
+                            - windage * ((now[i].Y - prev[i].Y) / dT))
                             + F2 * Math.Sin(alpha) - F1 * Math.Sin(alpha_prev);
-
-
                     }
                     next[i] = new dPoint(x, y);
                 }
@@ -514,8 +469,14 @@ namespace App
             }
         }
 
+        /// <summary>
         /// Проверка на пересечение
-        
+        /// </summary>
+        /// <param name="t1">Первая точка нити</param>
+        /// <param name="t2">Вторая точка нити</param>
+        /// <param name="b1">Первая точка бильной планки</param>
+        /// <param name="b2">Вторая точка бильной планки</param>
+        /// <returns>Возвращает true, если пересечени есть</returns>
         bool Transection(dPoint t1, dPoint t2, dPoint b1, dPoint b2) 
         {
             double v1 = (b2.X - b1.X) * (t1.Y - b1.Y) - (b2.Y - b1.Y) * (t1.X - b1.X);
@@ -525,16 +486,15 @@ namespace App
             return ((v1 * v2 < 0) && (v3 * v4 < 0));
         }
 
-        public dPoint[] Points
-        {
-            get
-            {
-                return now;
-            }
-        }
-
-        ///Вычисление массы точки
-
+        /// <summary>
+        /// Вычисление параметров точек - массы и площади поперечного сечения нити
+        /// </summary>
+        /// <param name="topDiameter">Диаметр нити в начале</param>
+        /// <param name="midDiameter">Диаметр нити на 1/3 длины</param>
+        /// <param name="botDiameter">Диаметр нити в конце</param>
+        /// <param name="plotn">Плотность нити</param>
+        /// <param name="weightRasp">Коэффициенты распределения массы вдоль нити</param>
+        /// <param name="weightLength">Коэффициенты функции зависимости массы нити от длины</param>
         private void PointsParameters(double? topDiameter,double? midDiameter,double? botDiameter,double? plotn,
             double?[] weightRasp,double[] weightLength)
         {
@@ -596,7 +556,15 @@ namespace App
 
 
         }
-
+        
+       
+        public dPoint[] Points
+        {
+            get
+            {
+                return now;
+            }
+        }
         public double MaxF
         { get { return maxF; } }
         public double MinF
@@ -632,67 +600,5 @@ namespace App
         //        return; 
         //    }
         //}
-
-
-        public void Function()
-        {
-            double[] x = { 93, 78, 85, 73, 98, 79, 80, 92, 68, 87, 75, 77, 79, 58, 80 };
-            //double [] x={1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
-            double[] y = { 0.256, 0.129, 0.310, 0.142, 0.313, 0.203, 0.155, 0.218, 0.111, 0.181, 0.163, 0.150, 0.167, 0.106, 0.146 };
-
-            double[,] a = new double[3, 3];
-            double[] b = new double[3];
-
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    if (i == 0 && j == 0)
-                    {
-                        a[i, j] = x.Length;
-                    }
-                    else
-                    {
-                        int k = i + j;
-
-                        for (int g = 0; g < x.Length; g++)
-                        {
-                            a[i, j] += Math.Pow(x[g], k);
-                        }
-                    }
-                }
-
-                for (int g = 0; g < x.Length; g++)
-                {
-                    b[i] += y[g] * Math.Pow(x[g], i);
-                }
-            }
-
-            double[] delta = new double[4];
-
-            delta[0] = a[0, 0] * a[1, 1] * a[2,2] + a[0, 1] * a[1, 2] * a[2, 0] +
-                a[1, 0] * a[2, 1] * a[0, 2] - a[0, 2] * a[1, 1] * a[2, 0] -
-                a[0, 1] * a[1, 0] * a[2, 2] - a[0, 0] * a[1, 2] * a[2, 1];
-
-            delta[1] = b[0] * a[1, 1] * a[2,2] + a[0, 1] * a[1, 2] * b[2] +
-                b[1] * a[2, 1] * a[0, 2] - a[0, 2] * a[1, 1] * b[2] -
-                a[0, 1] * b[1] * a[2, 2] - b[0] * a[1, 2] * a[2, 1];
-
-            delta[2] = a[0, 0] * b[1] * a[2,2] + b[0] * a[1, 2] * a[2, 0] +
-                a[1, 0] * b[2] * a[0, 2] - a[0, 2] * b[1] * a[2, 0] -
-                b[0] * a[1, 0] * a[2, 2] - a[0, 0] * a[1, 2] * b[2];
-
-            delta[3] = a[0, 0] * a[1, 1] * b[2] + a[0, 1] * b[1] * a[2, 0] +
-                a[1, 0] * a[2, 1] * b[0] - b[0] * a[1, 1] * a[2, 0] -
-                a[0, 1] * a[1, 0] * b[2] - a[0, 0] * b[1] * a[2, 1];
-
-            double a0 = delta[1] / delta[0];
-            double a1 = delta[2] / delta[0];
-            double a2 = delta[3] / delta[0];
-
-            int ghgijk = 0;
-        }
-
-
     }
 }

@@ -93,6 +93,8 @@ namespace App
             rezultArray = new double[parameters.yarnCount, 3];
 
             InitializeComponent();
+            
+            animation1.ClampParameters(parameters.clampType, parameters.threadPosition);
         }
 
         /// <summary>
@@ -152,7 +154,7 @@ namespace App
 
                 MessageBox.Show("Процесс закончен. Затрачено времени - "+label3.Text.ToString()+"c."+text);
 
-                WriteRezult();
+                //WriteRezult();
 
                 return;
             }
@@ -245,16 +247,16 @@ namespace App
 
             if (checkBox2.Checked)
             {
-                chart1.Series[1].Points.Add(currentYarn.SrF);
+                chart1.Series[0].Points.Add(currentYarn.SrF);
 
-                if (chart1.Series[1].Points.Count > 200)
+                if (chart1.Series[0].Points.Count > 200)
                 {
-                    chart1.Series[1].Points.RemoveAt(0);
+                    chart1.Series[0].Points.RemoveAt(0);
                 }
             }
 
             if(checkBox1.Checked)
-                animation1.Draw(currentYarn.Points, beaters,currentYarn.BendRadius);
+                animation1.Draw(currentYarn.Points, beaters);
 
             if (stop)
             {

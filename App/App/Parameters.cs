@@ -26,40 +26,14 @@ namespace App
             radioButton8.Checked = true;
         }
 
-        /// <summary>
-        /// Изменение варианта распределения массы вдоль стебля
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void radioButton8_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton8.Checked)
-            {
-                groupBox5.Enabled = true;
-                groupBox12.Enabled = false;
-                groupBox13.Enabled = false;
-            }
-            else if (radioButton2.Checked)
-            {
-                groupBox5.Enabled = false;
-                groupBox12.Enabled = true;
-                groupBox13.Enabled = false;
-            }
-            else
-            {
-                groupBox5.Enabled = false;
-                groupBox12.Enabled = false;
-                groupBox13.Enabled = true;
-            }
-        }
 
         /// <summary>
-        /// Кнопка "ОК" Сохранение параметров, переход к модели
+        /// Сохранение и запуск основной формы
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
+        private void SaveAndLoad()
         {
+            #region Переменные
+
             //Нить
             double?[] threadWeigthRasp = { 0 };
 
@@ -97,6 +71,8 @@ namespace App
             //Зажим
             double clampLength = 0;
             double beltDistance = 0;
+            int clampType = 0;
+
             double clampForce = 0;
 
 
@@ -105,6 +81,7 @@ namespace App
             double startAngle1 = 0;
             double startAngle2 = 0;
 
+            #endregion
 
             ///Изменение параметров
 
@@ -152,7 +129,7 @@ namespace App
                 threadFriction = a;
 
             if (double.TryParse(textBox14.Text, out a))
-                threadHard = a;
+                threadHard = a*Math.Pow(10,-10);
 
             if (double.TryParse(textBox41.Text, out a))
                 weightLength[0] = a;
@@ -167,7 +144,7 @@ namespace App
             ///Параметры модели
 
             if (double.TryParse(textBox2.Text, out a))
-                dt = a;
+                dt = a*Math.Pow(10,-7);
 
             if (int.TryParse(textBox16.Text, out b))
                 yarnCount = b;
@@ -186,6 +163,14 @@ namespace App
 
             if (double.TryParse(textBox6.Text, out a))
                 clampLength = a;
+
+
+            if (radioButton3.Checked)
+                clampType = 1;
+            else if (radioButton4.Checked)
+                clampType = 2;
+            else
+                clampType = 3;
 
 
 
@@ -285,6 +270,13 @@ namespace App
 
                 if (double.TryParse(textBox24.Text, out a))
                     threadWeigthRasp[0] = a;
+
+                if (double.TryParse(textBox22.Text, out a))
+                    threadPlotn = a;
+
+                threadTopDiameter = null;
+                threadMidDiameter = null;
+                threadBotDiameter = null;
             }
 
 
@@ -303,13 +295,23 @@ namespace App
                 ModelParameters p = new ModelParameters(threadWeigthRasp, expectedValueLength,
                     varianceLength, threadTopDiameter, threadMidDiameter, threadBotDiameter, threadYoungModul,
                     threadPosition, threadFriction, threadHard, threadPlotn, expectedValueOffset, varianceOffset,
-                    expectedValueAngle, varianceAngle, rollParameter, clampLength, beltDistance, dt,
+                    expectedValueAngle, varianceAngle, rollParameter, clampLength, beltDistance,clampType, dt,
                     threadPointCount, yarnCount, windage, clampForce, weightLength);
 
                 owner.MParameters = p;
 
                 this.Close();
             }
+        }
+
+        /// <summary>
+        /// Кнопка "ОК" Сохранение параметров, переход к модели
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SaveAndLoad();
         }
 
         /// <summary>
@@ -462,5 +464,70 @@ namespace App
             textBox44.Text = a2.ToString();
 
         }
+        
+        /// <summary>
+        /// Изменение варианта распределения массы вдоль стебля
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radioButton8_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton8.Checked)
+            {
+                groupBox5.Enabled = true;
+                groupBox12.Enabled = false;
+                groupBox13.Enabled = false;
+            }
+            else if (radioButton2.Checked)
+            {
+                groupBox5.Enabled = false;
+                groupBox12.Enabled = true;
+                groupBox13.Enabled = false;
+            }
+            else
+            {
+                groupBox5.Enabled = false;
+                groupBox12.Enabled = false;
+                groupBox13.Enabled = true;
+            }
+        }
+        
+        /// <summary>
+        /// Изменение типа зажимного механизма
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton3.Checked)
+            {
+                groupBox2.Enabled = true;
+                groupBox14.Enabled = false;
+                groupBox15.Enabled = false;
+            }
+            else if (radioButton4.Checked)
+            {
+                groupBox2.Enabled = false;
+                groupBox14.Enabled = true;
+                groupBox15.Enabled = false;
+            }
+            else
+            {
+                groupBox2.Enabled = false;
+                groupBox14.Enabled = false;
+                groupBox15.Enabled = true;
+            }
+        }
+
+        private void Parameters_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SaveAndLoad();
+            }
+        }
+
+
+
     }
 }

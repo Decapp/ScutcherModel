@@ -13,21 +13,30 @@ namespace App
     {
         int k; ///масштаб
 
+        Pen penBeat;
+        Pen whiteBeat ;
+        Pen penThread ;
+        Pen redThread ;
+       
         public Animation()
         {
-            k = 400;
+            k = 430;
+
+            penBeat = new Pen(Color.Black, 3f);
+            whiteBeat = new Pen(Color.White, 4f);
+
+             penThread = new Pen(Color.DarkBlue, 1f);
+             redThread = new Pen(Color.Red, 1f);
+
             InitializeComponent();
-            pictureBox1.Parent = panel1;
         }
 
-        public void Draw(dPoint[] thread, Beater[] beaters, double bendRadius)
+        public void Draw(dPoint[] thread, Beater[] beaters)
         {
             Bitmap mbit = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             Graphics graphics = Graphics.FromImage(mbit);
             graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            Pen pen = new Pen(Color.Black, 1f);
-            Pen redPen = new Pen(Color.Red, 2f);
-
+            
 
             try
             {
@@ -35,7 +44,7 @@ namespace App
                 /// точки
                 for (int i = 0; i < thread.Length; i++)
                 {
-                    graphics.DrawEllipse(redPen, (int)(k * thread[i].X), (int)(k * thread[i].Y), 1, 1);
+                    graphics.DrawEllipse(redThread, (int)(k * thread[i].X), (int)(k * thread[i].Y), 1, 1);
                 }
 
                 /// отрезки
@@ -60,15 +69,15 @@ namespace App
 
                     if (transect)
                     {
-                        graphics.DrawLine(pen, (int)(k * thread[i - 1].X), (int)(k * thread[i - 1].Y),
+                        graphics.DrawLine(penThread, (int)(k * thread[i - 1].X), (int)(k * thread[i - 1].Y),
                             (int)(k * Xb), (int)(k * Yb));
 
-                        graphics.DrawLine(pen, (int)(k * thread[i].X), (int)(k * thread[i].Y),
+                        graphics.DrawLine(penThread, (int)(k * thread[i].X), (int)(k * thread[i].Y),
                             (int)(k * Xb), (int)(k * Yb));
                     }
                     else
                     {
-                        graphics.DrawLine(pen, (int)(k * thread[i - 1].X), (int)(k * thread[i - 1].Y),
+                        graphics.DrawLine(penThread, (int)(k * thread[i - 1].X), (int)(k * thread[i - 1].Y),
                             (int)(k * thread[i].X), (int)(k * thread[i].Y));
                     }
                 }
@@ -76,36 +85,50 @@ namespace App
                 /// била
                 for (int i = 0; i < beaters.Length; i++)
                 {
-                    graphics.DrawLine(pen, (int)(k * beaters[i].Edge.X), (int)(k * beaters[i].Edge.Y),
+                    graphics.DrawLine(penBeat, (int)(k * beaters[i].Edge.X), (int)(k * beaters[i].Edge.Y),
                         (int)(k * beaters[i].Center.X), (int)(k * beaters[i].Center.Y));
                 }
 
+                ///Центры барабанов
 
-                double x = beaters[beaters.Length-1].Center.X-
-                    beaters[beaters.Length-1].Radius-0.01+bendRadius;
+                Point left1 = new Point((int)(k *beaters[0].Center.X) - 6, (int)(k * beaters[0].Center.Y) - 6);
+                Point left2 = new Point((int)(k * beaters[0].Center.X) - 3, (int)(k * beaters[0].Center.Y) - 3);
 
-                double y = beaters[beaters.Length-1].Center.Y;
+                int width1 = 12;
+                int width2 = 6;
 
-                Point center = new Point((int)x,(int)y);
+                graphics.DrawEllipse(penBeat, left1.X, left1.Y, width1, width1);
+                graphics.DrawEllipse(whiteBeat, left2.X, left2.Y, width2, width2);
 
-                x = center.X-bendRadius;
-                y= center.Y-bendRadius;
 
-                Point leftup = new Point((int)x, (int)y);
+                left1 = new Point((int)(k * beaters[beaters.Length - 1].Center.X) - 6, (int)(k * beaters[beaters.Length - 1].Center.Y) - 6);
+                left2 = new Point((int)(k * beaters[beaters.Length - 1].Center.X) - 3, (int)(k * beaters[beaters.Length - 1].Center.Y) - 3);
 
-                graphics.DrawEllipse(pen,leftup.X,leftup.Y,(int)(2*bendRadius),(int)(2*bendRadius));
+                width1 = 12;
+                width2 = 6;
+
+                graphics.DrawEllipse(penBeat, left1.X, left1.Y, width1, width1);
+                graphics.DrawEllipse(whiteBeat, left2.X, left2.Y, width2, width2);
+
 
                 pictureBox1.Image = mbit;
             }
-            catch 
+            catch
             {
                 MessageBox.Show("Ошибка переполнения");
             }
         }
 
-        private void Animation_Load(object sender, EventArgs e)
+        public void ClampParameters(int type, double location)
         {
+            if (type == 1)
+                pictureBox2.Image = Properties.Resources.clamp1;
+            if (type == 2)
+                pictureBox2.Image = Properties.Resources.clamp2;
+            if (type == 3)
+                pictureBox2.Image = Properties.Resources.clamp3;
 
+            pictureBox2.Location = new Point((int)(location * k - 49), pictureBox2.Location.Y);
         }
     }
 }

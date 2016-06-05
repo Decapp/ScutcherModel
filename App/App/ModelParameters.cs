@@ -42,7 +42,7 @@ namespace App
 
         public double clampLength; ///Длина линии сопряжения
         public double beltDistance; ///Расстояние между ремнями
-
+        public int clampType; ///Тип зажима
 
         //Параметры барабанов
 
@@ -80,6 +80,7 @@ namespace App
             double[,] _rollParameter,
             double _clampLength,
             double _beltDistance,
+            int _clampType,
             double _dt,
             int _threadPointCount,
             int _yarnCount,
@@ -117,6 +118,7 @@ namespace App
 
             this.clampLength = _clampLength;
             this.beltDistance = _beltDistance;
+            this.clampType = _clampType;
 
 
             this.dt = _dt;

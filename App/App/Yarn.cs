@@ -111,6 +111,8 @@ namespace App
             ///Задание масс и поперечных сечений
 
             PointsParameters(_topDiameter,_midDiameter,_botDiameter,_plotn,_weigthRasp, _weightLength);
+
+            int fdhg = 0;
         }
 
         /// <summary>
@@ -545,6 +547,16 @@ namespace App
                 ///Коэффициент отношения масс
                 double kf = (len1/len2);
 
+
+
+                ///Масса нити реальная и эталонная
+                double f1 = 7 * Math.Pow(10, -5) * Math.Pow(length * 100, 2) - 0.005 * length * 100 + 0.146;
+                double f2 = 7 * Math.Pow(10, -5) * Math.Pow(75, 2) - 0.005 * 75 + 0.146;
+
+                ///Коэффициент отношения масс
+                kf = (f1 / f2);
+
+
                 for (int i = 0; i < pointCount; i++)
                 {
                     double a = ((double)weightRasp[0] / 150 / 10) * ((i * dl) - ((i - 1) * dl)) +
@@ -553,6 +565,7 @@ namespace App
                         1 / 4 * ((double)weightRasp[3] / 150 / 10) * (Math.Pow((i * dl), 4) - Math.Pow(((i - 1) * dl), 4));
 
                     a *= kf;
+
 
                     pointWeight[i] = a;
 

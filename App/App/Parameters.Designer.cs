@@ -196,6 +196,10 @@
             this.label82 = new System.Windows.Forms.Label();
             this.textBox32 = new System.Windows.Forms.TextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.textBox22 = new System.Windows.Forms.TextBox();
+            this.label83 = new System.Windows.Forms.Label();
+            this.label84 = new System.Windows.Forms.Label();
+            this.label91 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -1663,6 +1667,10 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.textBox22);
+            this.groupBox5.Controls.Add(this.label83);
+            this.groupBox5.Controls.Add(this.label84);
+            this.groupBox5.Controls.Add(this.label91);
             this.groupBox5.Controls.Add(this.pictureBox3);
             this.groupBox5.Controls.Add(this.textBox20);
             this.groupBox5.Controls.Add(this.label65);
@@ -1686,7 +1694,7 @@
             // 
             // textBox20
             // 
-            this.textBox20.Location = new System.Drawing.Point(458, 61);
+            this.textBox20.Location = new System.Drawing.Point(386, 64);
             this.textBox20.Name = "textBox20";
             this.textBox20.Size = new System.Drawing.Size(66, 20);
             this.textBox20.TabIndex = 51;
@@ -1696,7 +1704,7 @@
             // label65
             // 
             this.label65.AutoSize = true;
-            this.label65.Location = new System.Drawing.Point(433, 64);
+            this.label65.Location = new System.Drawing.Point(361, 67);
             this.label65.Name = "label65";
             this.label65.Size = new System.Drawing.Size(19, 13);
             this.label65.TabIndex = 63;
@@ -1705,7 +1713,7 @@
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(530, 64);
+            this.label43.Location = new System.Drawing.Point(458, 67);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(15, 13);
             this.label43.TabIndex = 53;
@@ -1714,7 +1722,7 @@
             // label48
             // 
             this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(445, 36);
+            this.label48.Location = new System.Drawing.Point(373, 39);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(79, 13);
             this.label48.TabIndex = 52;
@@ -1937,6 +1945,42 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Параметры модели";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // textBox22
+            // 
+            this.textBox22.Location = new System.Drawing.Point(508, 64);
+            this.textBox22.Name = "textBox22";
+            this.textBox22.Size = new System.Drawing.Size(66, 20);
+            this.textBox22.TabIndex = 64;
+            this.textBox22.Text = "500";
+            this.textBox22.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label83
+            // 
+            this.label83.AutoSize = true;
+            this.label83.Location = new System.Drawing.Point(496, 42);
+            this.label83.Name = "label83";
+            this.label83.Size = new System.Drawing.Size(87, 13);
+            this.label83.TabIndex = 65;
+            this.label83.Text = "Плотность нити";
+            // 
+            // label84
+            // 
+            this.label84.AutoSize = true;
+            this.label84.Location = new System.Drawing.Point(495, 67);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(13, 13);
+            this.label84.TabIndex = 67;
+            this.label84.Text = "p";
+            // 
+            // label91
+            // 
+            this.label91.AutoSize = true;
+            this.label91.Location = new System.Drawing.Point(580, 67);
+            this.label91.Name = "label91";
+            this.label91.Size = new System.Drawing.Size(37, 13);
+            this.label91.TabIndex = 66;
+            this.label91.Text = "кг/м3";
             // 
             // Parameters
             // 
@@ -2168,5 +2212,9 @@
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.Label label78;
         private System.Windows.Forms.Label label77;
+        private System.Windows.Forms.TextBox textBox22;
+        private System.Windows.Forms.Label label83;
+        private System.Windows.Forms.Label label84;
+        private System.Windows.Forms.Label label91;
     }
 }

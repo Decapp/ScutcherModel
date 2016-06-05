@@ -502,59 +502,67 @@ namespace App
             pointWeight = new double[pointCount];
             pointCrossSection = new double[pointCount];
 
+            double dl = length / pointCount;
 
-
-            if (topDiameter != null && midDiameter != null && botDiameter != null)
+            if (topDiameter != null && midDiameter != null && botDiameter != null) ///Линейное распределение
             {
+                for (int i = 0; i < pointCount; i++)
+                {
+                    double Dx;
 
+                    double x = i * dl - i * dl / 2;
+
+                    if (x <= length / 3)
+                        Dx = (double)topDiameter - (((double)topDiameter - (double)midDiameter) / 2 * length / 3) * x;
+                    else
+                        Dx = (double)midDiameter - (((double)midDiameter - (double)botDiameter) / 4 * length / 3) * (x - length/3);
+
+                    double S = (Math.PI * Math.Pow(Dx, 2)) / 4;
+                    double M = (double)plotn * S * dl;
+
+                    pointWeight[i] = M;
+                    pointCrossSection[i] = S;
+                }
             }
-            else if(topDiameter!=null && midDiameter==null && botDiameter==null && plotn==null)
+            else if(topDiameter!=null && midDiameter==null && botDiameter==null) ///Равномерное распределение
             {
+                
+                double S=(Math.PI*Math.Pow((double)topDiameter,2))/4;
+                double M=S*(this.length/pointCount)*(double)plotn;
 
+                for (int i = 0; i < pointCount; i++)
+                {
+                    pointWeight[i]=M;
+                    pointCrossSection[i]=S;
+                }
             }
-            else if (weightLength != null)
+            else if (weightLength != null)  ///Распределение по закону
             {
+                ///Масса нити реальная и эталонная
+                double len1 = weightLength[0] * Math.Pow(length * 100, 2) +  weightLength[1]* length * 100 + weightLength[2];
+                double len2 = weightLength[0] * Math.Pow(75, 2) + weightLength[1] * 75 + weightLength[2];
 
+                ///Коэффициент отношения масс
+                double kf = (len1/len2);
+
+                for (int i = 0; i < pointCount; i++)
+                {
+                    double a = ((double)weightRasp[0] / 150 / 10) * ((i * dl) - ((i - 1) * dl)) +
+                        1 / 2 * ((double)weightRasp[1] / 150 / 10) * (Math.Pow((i * dl), 2) - Math.Pow(((i - 1) * dl), 2)) +
+                        1 / 3 * ((double)weightRasp[2] / 150 / 10) * (Math.Pow((i * dl), 3) - Math.Pow(((i - 1) * dl), 3)) +
+                        1 / 4 * ((double)weightRasp[3] / 150 / 10) * (Math.Pow((i * dl), 4) - Math.Pow(((i - 1) * dl), 4));
+
+                    a *= kf;
+
+                    pointWeight[i] = a;
+
+                    pointCrossSection[i] = a / ((double)plotn * dl);
+                }
             }
             else
             {
                 MessageBox.Show("Критическая ошибка, неверно заданы массы нити", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
-
-
-
-            ///Масса нити реальная и эталонная
-            double f1 = 7 * Math.Pow(10, -5) * Math.Pow(length * 100, 2) - 0.005 * length * 100 + 0.146;
-            double f2 = 7 * Math.Pow(10, -5) * Math.Pow(75, 2) - 0.005 * 75 + 0.146;
-
-            ///Коэффициент отношения масс
-
-            double kf = (f1 / f2);
-
-
-
-            //if (weight != null)
-            //{
-            //    return (double)weight / pointCount;
-            //}
-            //else
-            //{
-            //    double dl = length / pointCount;
-
-            //    double a = (weightRasp[0] / 150 / 10) * ((pointNumber * dl) - ((pointNumber - 1) * dl)) +
-            //        1 / 2 * (weightRasp[1] / 150 / 10) * (Math.Pow((pointNumber * dl), 2) - Math.Pow(((pointNumber - 1) * dl), 2)) +
-            //        1 / 3 * (weightRasp[2] / 150 / 10) * (Math.Pow((pointNumber * dl), 3) - Math.Pow(((pointNumber - 1) * dl), 3)) +
-            //        1 / 4 * (weightRasp[3] / 150 / 10) * (Math.Pow((pointNumber * dl), 4) - Math.Pow(((pointNumber - 1) * dl), 4));
-
-            //    a *= kf;
-
-            //    return a;
-            //}
-
-
-
         }
         
        

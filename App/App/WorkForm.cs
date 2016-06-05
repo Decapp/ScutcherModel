@@ -440,13 +440,7 @@ namespace App
             Parameters pr = new Parameters();
             pr.Show();
         }
-
-        public ModelParameters MParameters
-        {
-            get { return parameters; }
-            set { parameters = value; }
-        }
-
+ 
         /// <summary>
         /// Таймер на время работы модели
         /// </summary>
@@ -458,7 +452,11 @@ namespace App
             label3.Text = Time.ToString();
         }
 
-
+        public ModelParameters MParameters
+        {
+            get { return parameters; }
+            set { parameters = value; }
+        }
 
     }
 }

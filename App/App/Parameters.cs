@@ -243,9 +243,11 @@ namespace App
                 if (double.TryParse(textBox20.Text, out a))
                     threadTopDiameter = a;
 
+                if (double.TryParse(textBox22.Text, out a))
+                    threadPlotn = a;
+
                 threadMidDiameter = null;
                 threadBotDiameter = null;
-                threadPlotn = null;
                 threadWeigthRasp = null;
 
             }

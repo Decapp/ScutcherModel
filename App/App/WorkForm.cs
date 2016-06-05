@@ -30,10 +30,9 @@ namespace App
         double[] offsetArray; ///Массив смещений
         double[] angleArray; ///Массив углов дезориентации
 
-        double Time; ///Время работы модели
-
         double[,] rezultArray; ///Массив с результатами
 
+        DateTime Time; ///Время работы модели
 
         public WorkForm()
         {
@@ -88,7 +87,7 @@ namespace App
 
             #endregion
 
-            Time = 0;
+            Time = new DateTime(2016,1,1,0,0,0);
 
             rezultArray = new double[parameters.yarnCount, 3];
 
@@ -178,7 +177,9 @@ namespace App
                     parameters.threadHard,parameters.threadDensity,parameters.weightLength,
                     parameters.windage, beaters);
 
-                label1.Text = currentYarn.Length.ToString();
+                label11.Text = lengthArray[currentNumberYarn].ToString("f5") + " м";
+                label12.Text = currentYarn.ClampY.ToString("f5")+" м";
+                label10.Text = currentNumberYarn.ToString();
 
                 currentNumberYarn++;
                 
@@ -244,6 +245,7 @@ namespace App
                 }
             }
 
+            label6.Text = currentYarn.MaxF.ToString("f5")+ " Н";
 
             if (checkBox2.Checked)
             {
@@ -450,8 +452,10 @@ namespace App
         /// <param name="e"></param>
         private void timer2_Tick(object sender, EventArgs e)
         {
-            Time++;
-            label3.Text = Time.ToString();
+            Time = Time.AddSeconds(1);
+
+            label3.Text = (Time.Day-1).ToString()+":"+Time.Hour.ToString()+":"
+                +Time.Minute.ToString()+":"+Time.Second.ToString();
         }
 
         public ModelParameters MParameters

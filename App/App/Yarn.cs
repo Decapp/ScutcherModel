@@ -604,6 +604,10 @@ namespace App
         {
             get { return bendRadius; }
         }
+        public double ClampY
+        {
+            get { return y_end; }
+        }
         
         //public double Weight
         //{

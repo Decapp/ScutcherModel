@@ -26,6 +26,8 @@ namespace App
         double srF; ///Среднее значение силы натяжения
         int fCount; ///Количество моментов времени, для подсчета усредненной силы натяжения
 
+        double Fclamp; ///Сила зажима
+
         bool error; ///Имеется ли ошибка
 
         double frict; ///Коэффициент трения
@@ -41,11 +43,13 @@ namespace App
 
         double bendRadius;
 
+       
+
         //double threadHiddenLength; ///Длина нити в зажиме
 
         public Yarn(double?[] _weigthRasp, double _length, double? _topDiameter, double? _midDiameter, 
             double? _botDiameter, double _youngModul,double _dt, int _pointCount, double _position, double _angle,
-            double _clampLength,double _beltDistance, double _offset, double _frict, double _hard, double? _plotn,
+            double _clampLength,double _beltDistance, int _clampType, double _offset, double _frict, double _hard, double? _plotn,
             double[] _weightLength, double _windage, Beater[] beaters)
         {
             this.length = _length;
@@ -77,6 +81,8 @@ namespace App
             this.length = _length - y_end; ///Длина свисающей части
             this.hiddenLength = _length - this.length; ///Длина части в зажиме
 
+
+
             #region Начальное положение нити по окружности
             
             double l = beaters[beaters.Length - 1].Center.X - _position;
@@ -107,6 +113,7 @@ namespace App
             
             #endregion
 
+            FclampFunction(_clampType);
 
             ///Задание масс и поперечных сечений
 
@@ -447,7 +454,7 @@ namespace App
                 bool kick1 = false;
 
 
-                double C = youngModul * pointCrossSection[pt2] / (length / pointCount);
+                double C = youngModul * pointCrossSection[pt2] / (length / (pointCount-1));
 
 
 
@@ -460,6 +467,11 @@ namespace App
                 double l2 = length / (pointCount - 1);
 
                 double F = C * (l1 - l2);
+
+                if (F > 0.7)
+                {
+                    int dffg = 0;
+                }
 
                 srF += F;
                 fCount++;
@@ -497,14 +509,14 @@ namespace App
         /// <param name="plotn">Плотность нити</param>
         /// <param name="weightRasp">Коэффициенты распределения массы вдоль нити</param>
         /// <param name="weightLength">Коэффициенты функции зависимости массы нити от длины</param>
-        private void PointsParameters(double? topDiameter,double? midDiameter,double? botDiameter,double? plotn,
-            double?[] weightRasp,double[] weightLength)
+        private void PointsParameters(double? topDiameter, double? midDiameter, double? botDiameter, double? plotn,
+            double?[] weightRasp, double[] weightLength)
         {
-            
+
             pointWeight = new double[pointCount];
             pointCrossSection = new double[pointCount];
 
-            double dl = length / pointCount;
+            double dl = length / (pointCount - 1);
 
             if (topDiameter != null && midDiameter != null && botDiameter != null) ///Линейное распределение
             {
@@ -517,7 +529,7 @@ namespace App
                     if (x <= length / 3)
                         Dx = (double)topDiameter - (((double)topDiameter - (double)midDiameter) / 2 * length / 3) * x;
                     else
-                        Dx = (double)midDiameter - (((double)midDiameter - (double)botDiameter) / 4 * length / 3) * (x - length/3);
+                        Dx = (double)midDiameter - (((double)midDiameter - (double)botDiameter) / 4 * length / 3) * (x - length / 3);
 
                     double S = (Math.PI * Math.Pow(Dx, 2)) / 4;
                     double M = (double)plotn * S * dl;
@@ -526,35 +538,26 @@ namespace App
                     pointCrossSection[i] = S;
                 }
             }
-            else if(topDiameter!=null && midDiameter==null && botDiameter==null) ///Равномерное распределение
+            else if (topDiameter != null && midDiameter == null && botDiameter == null) ///Равномерное распределение
             {
-                
-                double S=(Math.PI*Math.Pow((double)topDiameter,2))/4;
-                double M=S*(this.length/pointCount)*(double)plotn;
+
+                double S = (Math.PI * Math.Pow((double)topDiameter, 2)) / 4;
+                double M = S * dl * (double)plotn;
 
                 for (int i = 0; i < pointCount; i++)
                 {
-                    pointWeight[i]=M;
-                    pointCrossSection[i]=S;
+                    pointWeight[i] = M;
+                    pointCrossSection[i] = S;
                 }
             }
             else if (weightLength != null)  ///Распределение по закону
             {
                 ///Масса нити реальная и эталонная
-                double len1 = weightLength[0] * Math.Pow(length * 100, 2) +  weightLength[1]* length * 100 + weightLength[2];
-                double len2 = weightLength[0] * Math.Pow(75, 2) + weightLength[1] * 75 + weightLength[2];
+                double len1 = weightLength[2] * Math.Pow(length * 100, 2) + weightLength[1] * length * 100 + weightLength[0];
+                double len2 = weightLength[2] * Math.Pow(75, 2) + weightLength[1] * 75 + weightLength[0];
 
                 ///Коэффициент отношения масс
-                double kf = (len1/len2);
-
-
-
-                ///Масса нити реальная и эталонная
-                double f1 = 7 * Math.Pow(10, -5) * Math.Pow(length * 100, 2) - 0.005 * length * 100 + 0.146;
-                double f2 = 7 * Math.Pow(10, -5) * Math.Pow(75, 2) - 0.005 * 75 + 0.146;
-
-                ///Коэффициент отношения масс
-                kf = (f1 / f2);
+                double kf = (len1 / len2);
 
 
                 for (int i = 0; i < pointCount; i++)
@@ -575,10 +578,92 @@ namespace App
             else
             {
                 MessageBox.Show("Критическая ошибка, неверно заданы массы нити", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.error = true;
+                return;
+            }
+
+            for (int i = 0; i < pointCount; i++)
+            {
+                pointWeight[i] = 0.001 / pointCount;
+                pointCrossSection[i] = (Math.PI * Math.Pow((double)topDiameter, 2)) / 4;
             }
         }
-        
-       
+
+        public void FclampFunction(int clampType)
+        {
+            //switch (clampType)
+            //{
+            //    case 1: break;
+            //    case 2: break;
+
+            //    default: break;
+            //}
+
+
+            double[] x = { 0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09 };
+
+            double[] y = { 0,0.5,0.7,2.1,2,4,3.5,6.5,7,8};
+
+            double[,] a = new double[3, 3];
+            double[] b = new double[3];
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (i == 0 && j == 0)
+                    {
+                        a[i, j] = x.Length;
+                    }
+                    else
+                    {
+                        int k = i + j;
+
+                        for (int g = 0; g < x.Length; g++)
+                        {
+                            a[i, j] += Math.Pow(x[g], k);
+                        }
+                    }
+                }
+
+                for (int g = 0; g < x.Length; g++)
+                {
+                    b[i] += y[g] * Math.Pow(x[g], i);
+                }
+            }
+
+            double[] delta = new double[4];
+
+            delta[0] = a[0, 0] * a[1, 1] * a[2, 2] + a[0, 1] * a[1, 2] * a[2, 0] +
+                a[1, 0] * a[2, 1] * a[0, 2] - a[0, 2] * a[1, 1] * a[2, 0] -
+                a[0, 1] * a[1, 0] * a[2, 2] - a[0, 0] * a[1, 2] * a[2, 1];
+
+            delta[1] = b[0] * a[1, 1] * a[2, 2] + a[0, 1] * a[1, 2] * b[2] +
+                b[1] * a[2, 1] * a[0, 2] - a[0, 2] * a[1, 1] * b[2] -
+                a[0, 1] * b[1] * a[2, 2] - b[0] * a[1, 2] * a[2, 1];
+
+            delta[2] = a[0, 0] * b[1] * a[2, 2] + b[0] * a[1, 2] * a[2, 0] +
+                a[1, 0] * b[2] * a[0, 2] - a[0, 2] * b[1] * a[2, 0] -
+                b[0] * a[1, 0] * a[2, 2] - a[0, 0] * a[1, 2] * b[2];
+
+            delta[3] = a[0, 0] * a[1, 1] * b[2] + a[0, 1] * b[1] * a[2, 0] +
+                a[1, 0] * a[2, 1] * b[0] - b[0] * a[1, 1] * a[2, 0] -
+                a[0, 1] * a[1, 0] * b[2] - a[0, 0] * b[1] * a[2, 1];
+
+            double a0 = delta[1] / delta[0];
+            double a1 = delta[2] / delta[0];
+            double a2 = delta[3] / delta[0];
+
+            if(y_end >0.08)
+                this.Fclamp = a2 * Math.Pow(0.08, 2) + a1 * 0.08 + a0;
+            else
+                this.Fclamp = a2 * Math.Pow(y_end, 2) + a1 * y_end + a0;
+
+            this.Fclamp /= 10;
+
+            int dfgfhg = 0;
+        }
+   
         public dPoint[] Points
         {
             get
@@ -608,22 +693,24 @@ namespace App
         {
             get { return y_end; }
         }
+        public double ClampF
+        {
+            get { return Fclamp; }
+        }
+        public double Weight
+        {
+            get
+            {
+                double S = 0;
+                for (int i = 0; i < pointCount; i++)
+                    S += pointWeight[i];
+
+                return S;
+            }
+        }
         
-        //public double Weight
-        //{
-        //    get 
-        //    {
-        //        if (weight != null)
-        //        {
-        //            return (double)weight;
-        //        }
-        //        else
-        //        {
 
-        //        }
 
-        //        return; 
-        //    }
-        //}
+
     }
 }

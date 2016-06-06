@@ -22,7 +22,7 @@ namespace App
         {
             k = 430;
 
-            penBeat = new Pen(Color.Black, 3f);
+            penBeat = new Pen(Color.Black, 1f);
             whiteBeat = new Pen(Color.White, 4f);
 
              penThread = new Pen(Color.DarkBlue, 1f);

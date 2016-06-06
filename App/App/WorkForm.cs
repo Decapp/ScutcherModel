@@ -87,12 +87,12 @@ namespace App
 
             #endregion
 
-            Time = new DateTime(2016,1,1,0,0,0);
+            Time = new DateTime(2016, 1, 1, 0, 0, 0);
 
             rezultArray = new double[parameters.yarnCount, 3];
 
             InitializeComponent();
-            
+
             animation1.ClampParameters(parameters.clampType, parameters.threadPosition);
         }
 
@@ -101,39 +101,27 @@ namespace App
         /// </summary>
         private void NextYarn()
         {
-            ///Тут должны быть расчеты
-            ///Расчет ведется для предыдущей нити
-            ///Берется макс натяжение в нити
-            ///Остальное расчитывается здесь
-
-
-            if (currentYarn != null)
-            {
-                //chart1.Series[0].Points.Add(currentYarn.MaxF);
-                //chart1.Series[1].Points.Add(currentYarn.MinF);
-                //chart1.Series[2].Points.Add(currentYarn.SrF);
-            }
-
             if (currentNumberYarn != 0)
             {
-                if (currentYarn.SrF < parameters.clampForce)
+                if (currentYarn.MaxF < currentYarn.ClampF)
                 {
-                    MessageBox.Show("Прядь сохранена. Максимальная сила натяжения - " + currentYarn.MaxF + " H.");
-                    rezultArray[currentNumberYarn - 1, 1] = 1;
+                    //MessageBox.Show("Прядь сохранена. Максимальная сила натяжения - " + currentYarn.MaxF + " H.");
+                    rezultArray[currentNumberYarn - 1, 0] = 1;
                 }
                 else
                 {
-                    MessageBox.Show("Прядь вылетела. Максимальная сила натяжения - " + currentYarn.MaxF + " H.");
-                    rezultArray[currentNumberYarn - 1, 1] = 0;
+                    //MessageBox.Show("Прядь вылетела. Максимальная сила натяжения - " + currentYarn.MaxF + " H.");
+                    rezultArray[currentNumberYarn - 1, 0] = 0;
                 }
 
                 if (currentYarn.Error)
                 {
-                    MessageBox.Show("Ошибка в движении нити, продолжить работу?", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                    rezultArray[currentNumberYarn - 1, 1] = 2;
+                    //MessageBox.Show("Ошибка в движении нити, продолжить работу?", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                    rezultArray[currentNumberYarn - 1, 0] = 2;
                 }
 
-                rezultArray[currentNumberYarn - 1, 2] = currentYarn.MaxF;
+                rezultArray[currentNumberYarn - 1, 1] = currentYarn.MaxF;
+                rezultArray[currentNumberYarn - 1, 2] = currentYarn.Weight;
             }
 
             if (currentNumberYarn == parameters.yarnCount)
@@ -141,19 +129,19 @@ namespace App
                 timer2.Stop();
 
 
-                string text = ""+Environment.NewLine;
+                //string text = ""+Environment.NewLine;
 
-                for (int i = 0; i < rezultArray.GetLength(0); i++)
-                {
-                    text += i.ToString() + " - " + rezultArray[i, 1].ToString() 
-                        + " - " + rezultArray[i, 2]+Environment.NewLine;
-                }
+                //for (int i = 0; i < rezultArray.GetLength(0); i++)
+                //{
+                //    text += i.ToString() + " - " + rezultArray[i, 1].ToString() 
+                //        + " - " + rezultArray[i, 2]+Environment.NewLine;
+                //}
 
-                text += Environment.NewLine;
+                //text += Environment.NewLine;
 
-                MessageBox.Show("Процесс закончен. Затрачено времени - "+label3.Text.ToString()+"c."+text);
+                MessageBox.Show("Процесс закончен. Затрачено времени - " + label3.Text.ToString());
 
-                //WriteRezult();
+                WriteRezult();
 
                 return;
             }
@@ -170,19 +158,20 @@ namespace App
 
                 currentYarn = new Yarn(parameters.threadWeightRasp,
                     lengthArray[(int)currentNumberYarn], parameters.threadTopDiameter,
-                    parameters.threadMidDiameter, parameters.threadBotDiameter, 
-                    parameters.threadYoungModul,parameters.dt, parameters.threadPointCount,
+                    parameters.threadMidDiameter, parameters.threadBotDiameter,
+                    parameters.threadYoungModul, parameters.dt, parameters.threadPointCount,
                     parameters.threadPosition, angleArray[(int)currentNumberYarn], parameters.clampLength,
-                    parameters.beltDistance, offsetArray[(int)currentNumberYarn],parameters.threadFriction,
-                    parameters.threadHard,parameters.threadDensity,parameters.weightLength,
-                    parameters.windage, beaters);
+                    parameters.beltDistance, parameters.clampType,offsetArray[(int)currentNumberYarn], 
+                    parameters.threadFriction,parameters.threadHard, parameters.threadDensity,
+                    parameters.weightLength, parameters.windage, beaters);
 
                 label11.Text = lengthArray[currentNumberYarn].ToString("f5") + " м";
-                label12.Text = currentYarn.ClampY.ToString("f5")+" м";
-                label10.Text = currentNumberYarn.ToString();
+                label12.Text = currentYarn.ClampY.ToString("f5") + " м";
+                label10.Text = (currentNumberYarn + 1).ToString();
+                label1.Text = (currentYarn.Weight * 1000).ToString("f5") + " г";
 
                 currentNumberYarn++;
-                
+
                 timer1.Start();
             }
         }
@@ -228,24 +217,33 @@ namespace App
             {
                 currentYarn.Next(beaters);
 
-                if (currentYarn.MaxF > parameters.clampForce)
+                //if (currentYarn.MaxF > currentYarn.ClampF)
+                //{
+                //    stop = true;
+                //    break;
+                //}
+
+                if (currentYarn.Error)
                 {
-                    stop = true;
+                    timer1.Stop();
+                    MessageBox.Show("Карачун");
                     break;
                 }
-
-                foreach (Beater b in beaters)
+                else
                 {
-                    b.Go(parameters.dt);
-                    if (b.CirclePassed)
+                    foreach (Beater b in beaters)
                     {
-                        stop = true;
-                        break;
+                        b.Go(parameters.dt);
+                        if (b.CirclePassed)
+                        {
+                            stop = true;
+                            break;
+                        }
                     }
                 }
             }
 
-            label6.Text = currentYarn.MaxF.ToString("f5")+ " Н";
+            label6.Text = currentYarn.MaxF.ToString("f5") + " Н";
 
             if (checkBox2.Checked)
             {
@@ -257,7 +255,7 @@ namespace App
                 }
             }
 
-            if(checkBox1.Checked)
+            if (checkBox1.Checked)
                 animation1.Draw(currentYarn.Points, beaters);
 
             if (stop)
@@ -289,13 +287,13 @@ namespace App
                 number += add;
             }
 
-            number -=6;
+            number -= 6;
 
             double x = expectedValue + Math.Pow(variance, 0.5) * number;
 
             if (x < expectedValue - variance) { x = expectedValue - variance; }
             if (x > expectedValue + variance) { x = expectedValue + variance; }
-            
+
             return x;
         }
 
@@ -306,7 +304,7 @@ namespace App
         {
             application = new Excel.Application();
             application.Visible = true;
-            application.SheetsInNewWorkbook = 3;
+            application.SheetsInNewWorkbook = 4;
             application.Workbooks.Add();
             Excel.Workbook book;
             Excel.Worksheet sheet;
@@ -316,25 +314,29 @@ namespace App
             sheet = book.Sheets[1];
             sheet.Name = "Результаты";
 
-            sheet.Cells[1, 1] = "Номер нити";
-            sheet.Cells[1, 2] = "Результат";
-            sheet.Cells[1, 3] = "Макс.Натяжение";
+            sheet.Cells[1, 1] = "Результат";
+            sheet.Cells[1, 2] = "Сила натяжения";
+            sheet.Cells[1, 3] = "Масса";
 
             for (int i = 0; i < rezultArray.GetLength(0); i++)
             {
-                sheet.Cells[i + 3, 1] = i + 1;
+                sheet.Cells[i + 3, 1] = rezultArray[i,0];
                 sheet.Cells[i + 3, 2] = rezultArray[i, 1];
                 sheet.Cells[i + 3, 3] = rezultArray[i, 2];
             }
 
 
+
             sheet = book.Sheets[2];
-            sheet.Name = "Распределение параметров";
+            sheet.Name = "Распределение длин";
             int[] intervals;
             double min;
             double n;
 
+
             #region Запись длин
+
+
 
             if (parameters.varianceLength == 0)
             {
@@ -356,9 +358,18 @@ namespace App
 
                 for (int i = 0; i < intervals.Length; i++)
                 {
-                    sheet.Cells[i + 2, 1] = "[" + (min + i) + ";" + (min + i + 1) + "]";
+                    sheet.Cells[i + 2, 1] = "[" + (min + i) + ";" + (min + i + 1) + ")";
                     sheet.Cells[i + 2, 2] = intervals[i];
                 }
+
+                sheet.Activate();
+                Excel.ChartObjects chartsobjrcts = (Excel.ChartObjects)sheet.ChartObjects(Type.Missing);
+                Excel.ChartObject chartsobjrct = chartsobjrcts.Add(150, 20, 400, 300);
+
+                chartsobjrct.Chart.ChartWizard(sheet.get_Range("A1", "B" + intervals.Length.ToString()),
+                    Excel.XlChartType.xlLine, 2, Excel.XlRowCol.xlColumns, Type.Missing,
+                    0, true, "Распределение длин", "Длина", "Количество", Type.Missing);
+
             }
             else
             {
@@ -368,73 +379,96 @@ namespace App
 
             #endregion
 
-            #region Запись смещений
 
-            if (parameters.varianceOffset == 0)
-            {
-                intervals = new int[(int)(Math.Round(parameters.varianceOffset * 100 * 2))];
 
-                min = (int)(parameters.expectedValueOffset * 100 - parameters.varianceOffset * 100);
 
-                for (int i = 0; i < offsetArray.Length; i++)
-                {
-                    n = offsetArray[i] * 100;
 
-                    if (n >= parameters.expectedValueOffset * 100 + parameters.varianceOffset * 100)
-                    { n--; }
+            //sheet = book.Sheets[3];
+            //sheet.Name = "Распределение параметров";
+            //int[] intervals;
+            //double min;
+            //double n;
 
-                    n -= min;
 
-                    intervals[(int)n]++;
-                }
 
-                for (int i = 0; i < intervals.Length; i++)
-                {
-                    sheet.Cells[i + 2, 4] = "[" + (min + i) + ";" + (min + i + 1) + "]";
-                    sheet.Cells[i + 2, 5] = intervals[i];
-                }
-            }
-            else
-            {
-                sheet.Cells[2, 4] = "Смещение постоянно = ";
-                sheet.Cells[2, 6] = parameters.expectedValueOffset;
-            }
 
-            #endregion
+            //#region Запись смещений
 
-            #region Запись углов
+            //if (parameters.varianceOffset == 0)
+            //{
+            //    intervals = new int[(int)(Math.Round(parameters.varianceOffset * 100 * 2))];
 
-            if (parameters.varianceAngle == 0)
-            {
-                intervals = new int[(int)(Math.Round(parameters.varianceAngle * 2))];
+            //    min = (int)(parameters.expectedValueOffset * 100 - parameters.varianceOffset * 100);
 
-                min = (int)(parameters.expectedValueAngle - parameters.varianceAngle);
+            //    for (int i = 0; i < offsetArray.Length; i++)
+            //    {
+            //        n = offsetArray[i] * 100;
 
-                for (int i = 0; i < angleArray.Length; i++)
-                {
-                    n = angleArray[i];
+            //        if (n >= parameters.expectedValueOffset * 100 + parameters.varianceOffset * 100)
+            //        { n--; }
 
-                    if (n >= parameters.expectedValueAngle + parameters.varianceAngle)
-                    { n--; }
+            //        n -= min;
 
-                    n -= min;
+            //        intervals[(int)n]++;
+            //    }
 
-                    intervals[(int)n]++;
-                }
+            //    for (int i = 0; i < intervals.Length; i++)
+            //    {
+            //        sheet.Cells[i + 2, 4] = "[" + (min + i) + ";" + (min + i + 1) + "]";
+            //        sheet.Cells[i + 2, 5] = intervals[i];
+            //    }
+            //}
+            //else
+            //{
+            //    sheet.Cells[2, 4] = "Смещение постоянно = ";
+            //    sheet.Cells[2, 6] = parameters.expectedValueOffset;
+            //}
 
-                for (int i = 0; i < intervals.Length; i++)
-                {
-                    sheet.Cells[i + 2, 7] = "[" + (min + i) + ";" + (min + i + 1) + "]";
-                    sheet.Cells[i + 2, 8] = intervals[i];
-                }
-            }
-            else
-            {
-                sheet.Cells[2, 7] = "Угол дезориентации постоянен = ";
-                sheet.Cells[2, 8] = parameters.expectedValueAngle;
-            }
+            //#endregion
 
-            #endregion
+            //#region Запись углов
+
+            //if (parameters.varianceAngle == 0)
+            //{
+            //    intervals = new int[(int)(Math.Round(parameters.varianceAngle * 2))];
+
+            //    min = (int)(parameters.expectedValueAngle - parameters.varianceAngle);
+
+            //    for (int i = 0; i < angleArray.Length; i++)
+            //    {
+            //        n = angleArray[i];
+
+            //        if (n >= parameters.expectedValueAngle + parameters.varianceAngle)
+            //        { n--; }
+
+            //        n -= min;
+
+            //        intervals[(int)n]++;
+            //    }
+
+            //    for (int i = 0; i < intervals.Length; i++)
+            //    {
+            //        sheet.Cells[i + 2, 7] = "[" + (min + i) + ";" + (min + i + 1) + "]";
+            //        sheet.Cells[i + 2, 8] = intervals[i];
+            //    }
+            //}
+            //else
+            //{
+            //    sheet.Cells[2, 7] = "Угол дезориентации постоянен = ";
+            //    sheet.Cells[2, 8] = parameters.expectedValueAngle;
+            //}
+
+            //#endregion
+
+
+
+
+
+
+
+
+
+
 
             sheet.Columns.EntireColumn.AutoFit();
         }
@@ -444,7 +478,7 @@ namespace App
             Parameters pr = new Parameters();
             pr.Show();
         }
- 
+
         /// <summary>
         /// Таймер на время работы модели
         /// </summary>
@@ -454,8 +488,8 @@ namespace App
         {
             Time = Time.AddSeconds(1);
 
-            label3.Text = (Time.Day-1).ToString()+":"+Time.Hour.ToString()+":"
-                +Time.Minute.ToString()+":"+Time.Second.ToString();
+            label3.Text = (Time.Day - 1).ToString() + ":" + Time.Hour.ToString() + ":"
+                + Time.Minute.ToString() + ":" + Time.Second.ToString();
         }
 
         public ModelParameters MParameters

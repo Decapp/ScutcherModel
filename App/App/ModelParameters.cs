@@ -57,7 +57,7 @@ namespace App
 
 
 
-        public double clampForce; ///Сила зажима
+        public double[] clampForce; ///Сила зажима
 
 
 
@@ -85,7 +85,7 @@ namespace App
             int _threadPointCount,
             int _yarnCount,
             double _windage,
-            double _clampForce,
+            double[] _clampForce,
             double[] _weightLength)
         {
             this.expectedValueLength = _expectedValueLength;

@@ -276,4 +276,3 @@ D:\ScutcherModel\App\App\bin\Debug\App.exe
 D:\ScutcherModel\App\App\bin\Debug\App.pdb
 D:\ScutcherModel\App\App\obj\x86\Debug\App.exe
 D:\ScutcherModel\App\App\obj\x86\Debug\App.pdb
-D:\ScutcherModel\App\App\obj\x86\Debug\App.csprojResolveAssemblyReference.cache

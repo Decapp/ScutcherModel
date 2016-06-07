@@ -94,6 +94,10 @@ namespace App
             InitializeComponent();
 
             animation1.ClampParameters(parameters.clampType, parameters.threadPosition);
+
+            dataGridView1.Columns.Add("number", "№");
+            dataGridView1.Columns.Add("status", "Статус");
+            dataGridView1.Columns.Add("force", "maxF");
         }
 
         /// <summary>
@@ -103,22 +107,34 @@ namespace App
         {
             if (currentNumberYarn != 0)
             {
-                if (currentYarn.MaxF < currentYarn.ClampF)
-                {
-                    //MessageBox.Show("Прядь сохранена. Максимальная сила натяжения - " + currentYarn.MaxF + " H.");
-                    rezultArray[currentNumberYarn - 1, 0] = 1;
-                }
-                else
-                {
-                    //MessageBox.Show("Прядь вылетела. Максимальная сила натяжения - " + currentYarn.MaxF + " H.");
-                    rezultArray[currentNumberYarn - 1, 0] = 0;
-                }
-
                 if (currentYarn.Error)
                 {
                     //MessageBox.Show("Ошибка в движении нити, продолжить работу?", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                     rezultArray[currentNumberYarn - 1, 0] = 2;
+
+                    dataGridView1.Rows.Add(currentNumberYarn, "Ошибка", "-");
+                    dataGridView1.Rows[currentNumberYarn - 1].Cells[0].Style.BackColor = Color.Red;
                 }
+                else
+                {
+                    if (currentYarn.MaxF < currentYarn.ClampF)
+                    {
+                        //MessageBox.Show("Прядь сохранена. Максимальная сила натяжения - " + currentYarn.MaxF + " H.");
+                        rezultArray[currentNumberYarn - 1, 0] = 1;
+
+                        dataGridView1.Rows.Add(currentNumberYarn, "Пройдена", currentYarn.MaxF.ToString("f2"));
+                        dataGridView1.Rows[currentNumberYarn - 1].Cells[0].Style.BackColor = Color.LightGreen;
+                    }
+                    else
+                    {
+                        //MessageBox.Show("Прядь вылетела. Максимальная сила натяжения - " + currentYarn.MaxF + " H.");
+                        rezultArray[currentNumberYarn - 1, 0] = 0;
+
+                        dataGridView1.Rows.Add(currentNumberYarn, "Вылетела", currentYarn.MaxF.ToString("f2"));
+                        dataGridView1.Rows[currentNumberYarn - 1].Cells[0].Style.BackColor = Color.LightGray;
+                    }
+                }
+
 
                 rezultArray[currentNumberYarn - 1, 1] = currentYarn.MaxF;
                 rezultArray[currentNumberYarn - 1, 2] = currentYarn.Weight;
@@ -161,7 +177,7 @@ namespace App
                     parameters.threadMidDiameter, parameters.threadBotDiameter,
                     parameters.threadYoungModul, parameters.dt, parameters.threadPointCount,
                     parameters.threadPosition, angleArray[(int)currentNumberYarn], parameters.clampLength,
-                    parameters.beltDistance, parameters.clampType,offsetArray[(int)currentNumberYarn], 
+                    parameters.beltDistance, parameters.clampType,parameters.clampForce, offsetArray[(int)currentNumberYarn], 
                     parameters.threadFriction,parameters.threadHard, parameters.threadDensity,
                     parameters.weightLength, parameters.windage, beaters);
 
@@ -217,16 +233,14 @@ namespace App
             {
                 currentYarn.Next(beaters);
 
-                //if (currentYarn.MaxF > currentYarn.ClampF)
-                //{
-                //    stop = true;
-                //    break;
-                //}
-
+                if (currentYarn.MaxF > currentYarn.ClampF)
+                {
+                    stop = true;
+                    break;
+                }
                 if (currentYarn.Error)
                 {
-                    timer1.Stop();
-                    MessageBox.Show("Карачун");
+                    stop = true;
                     break;
                 }
                 else

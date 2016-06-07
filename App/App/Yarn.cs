@@ -49,7 +49,7 @@ namespace App
 
         public Yarn(double?[] _weigthRasp, double _length, double? _topDiameter, double? _midDiameter, 
             double? _botDiameter, double _youngModul,double _dt, int _pointCount, double _position, double _angle,
-            double _clampLength,double _beltDistance, int _clampType, double _offset, double _frict, double _hard, double? _plotn,
+            double _clampLength,double _beltDistance, int _clampType, double[] _clampForce, double _offset, double _frict, double _hard, double? _plotn,
             double[] _weightLength, double _windage, Beater[] beaters)
         {
             this.length = _length;
@@ -113,7 +113,14 @@ namespace App
             
             #endregion
 
-            FclampFunction(_clampType);
+
+
+            if (y_end >= _clampLength)
+                this.Fclamp = _clampForce[2] * Math.Pow(_clampLength, 2) + _clampForce[1] * _clampLength + _clampForce[0];
+            else
+                this.Fclamp = _clampForce[2] * Math.Pow(y_end, 2) + _clampForce[1] * y_end + _clampForce[0];
+
+            this.Fclamp /= 10;
 
             ///Задание масс и поперечных сечений
 
@@ -587,81 +594,6 @@ namespace App
                 pointWeight[i] = 0.001 / pointCount;
                 pointCrossSection[i] = (Math.PI * Math.Pow((double)topDiameter, 2)) / 4;
             }
-        }
-
-        public void FclampFunction(int clampType)
-        {
-            //switch (clampType)
-            //{
-            //    case 1: break;
-            //    case 2: break;
-
-            //    default: break;
-            //}
-
-
-            double[] x = { 0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09 };
-
-            double[] y = { 0,0.5,0.7,2.1,2,4,3.5,6.5,7,8};
-
-            double[,] a = new double[3, 3];
-            double[] b = new double[3];
-
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    if (i == 0 && j == 0)
-                    {
-                        a[i, j] = x.Length;
-                    }
-                    else
-                    {
-                        int k = i + j;
-
-                        for (int g = 0; g < x.Length; g++)
-                        {
-                            a[i, j] += Math.Pow(x[g], k);
-                        }
-                    }
-                }
-
-                for (int g = 0; g < x.Length; g++)
-                {
-                    b[i] += y[g] * Math.Pow(x[g], i);
-                }
-            }
-
-            double[] delta = new double[4];
-
-            delta[0] = a[0, 0] * a[1, 1] * a[2, 2] + a[0, 1] * a[1, 2] * a[2, 0] +
-                a[1, 0] * a[2, 1] * a[0, 2] - a[0, 2] * a[1, 1] * a[2, 0] -
-                a[0, 1] * a[1, 0] * a[2, 2] - a[0, 0] * a[1, 2] * a[2, 1];
-
-            delta[1] = b[0] * a[1, 1] * a[2, 2] + a[0, 1] * a[1, 2] * b[2] +
-                b[1] * a[2, 1] * a[0, 2] - a[0, 2] * a[1, 1] * b[2] -
-                a[0, 1] * b[1] * a[2, 2] - b[0] * a[1, 2] * a[2, 1];
-
-            delta[2] = a[0, 0] * b[1] * a[2, 2] + b[0] * a[1, 2] * a[2, 0] +
-                a[1, 0] * b[2] * a[0, 2] - a[0, 2] * b[1] * a[2, 0] -
-                b[0] * a[1, 0] * a[2, 2] - a[0, 0] * a[1, 2] * b[2];
-
-            delta[3] = a[0, 0] * a[1, 1] * b[2] + a[0, 1] * b[1] * a[2, 0] +
-                a[1, 0] * a[2, 1] * b[0] - b[0] * a[1, 1] * a[2, 0] -
-                a[0, 1] * a[1, 0] * b[2] - a[0, 0] * b[1] * a[2, 1];
-
-            double a0 = delta[1] / delta[0];
-            double a1 = delta[2] / delta[0];
-            double a2 = delta[3] / delta[0];
-
-            if(y_end >0.08)
-                this.Fclamp = a2 * Math.Pow(0.08, 2) + a1 * 0.08 + a0;
-            else
-                this.Fclamp = a2 * Math.Pow(y_end, 2) + a1 * y_end + a0;
-
-            this.Fclamp /= 10;
-
-            int dfgfhg = 0;
         }
    
         public dPoint[] Points

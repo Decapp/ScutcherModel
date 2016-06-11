@@ -12,9 +12,6 @@ namespace App
 {
     public partial class Parameters : Form
     {
-        Bitmap mbit;
-        Graphics graphics;
-
         Pen penBeat;
         Pen whiteBeat;
         Pen penDash;
@@ -51,7 +48,7 @@ namespace App
             for (double i = 0; i <= 0.1; i += 0.01)
             {
                 double j= clampForce[2] * Math.Pow(i, 2) + clampForce[1] * i + clampForce[0];
-                chart1.Series[0].Points.AddXY(i, j);
+                chart1.Series[0].Points.AddXY(i, j/10);
             }
 
 
@@ -157,6 +154,7 @@ namespace App
             if (double.TryParse(textBox5.Text, out a))
                 varianceLength = a;
 
+
             ///Параметры пряди
 
             if (double.TryParse(textBox31.Text, out a))
@@ -165,8 +163,7 @@ namespace App
             if (double.TryParse(textBox30.Text, out a))
                 threadPosition = a;
 
-            if (int.TryParse(textBox29.Text, out b))
-                threadPointCount = b;
+                threadPointCount = (int)numericUpDown1.Value;
 
             if (double.TryParse(textBox11.Text, out a))
                 threadFriction = a;
@@ -202,20 +199,44 @@ namespace App
             {
                 clampType = 1;
 
-                if (double.TryParse(textBox6.Text, out a))
-                    clampLength = a;
+                double b1=0;
+                double h=0;
 
+                if (double.TryParse(textBox6.Text, out a))
+                { b1 = a; }
+                if (double.TryParse(textBox23.Text, out a))
+                { h = a; }
+
+                clampLength = 2 * h + b1;
             }
             else if (radioButton4.Checked)
             {
                 clampType = 2;
+
+                double R = 0;
+                if (double.TryParse(textBox33.Text, out a))
+                { R = a; }
+
+                clampLength = Math.PI * R;
             }
             else
             {
                 clampType = 3;
 
-            }
+                double b1 = 0;
+                double h = 0;
+                double R = 0;
 
+                if (double.TryParse(textBox36.Text, out a))
+                { b1 = a; }
+                if (double.TryParse(textBox48.Text, out a))
+                { h = a; }
+                if (double.TryParse(textBox37.Text, out a))
+                { R = a; }
+
+                double alpha = 2*Math.Asin(b/(2*R));
+                clampLength = 2 * h + R * alpha;
+            }
 
 
             ///Барабаны

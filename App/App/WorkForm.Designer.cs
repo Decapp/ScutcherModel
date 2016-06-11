@@ -34,7 +34,6 @@
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.параметрыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.генерацияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.параметрыМоделиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -80,17 +79,10 @@
             // параметрыToolStripMenuItem
             // 
             this.параметрыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.генерацияToolStripMenuItem,
             this.параметрыМоделиToolStripMenuItem});
             this.параметрыToolStripMenuItem.Name = "параметрыToolStripMenuItem";
             this.параметрыToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
             this.параметрыToolStripMenuItem.Text = "Параметры";
-            // 
-            // генерацияToolStripMenuItem
-            // 
-            this.генерацияToolStripMenuItem.Name = "генерацияToolStripMenuItem";
-            this.генерацияToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.генерацияToolStripMenuItem.Text = "Генерация";
             // 
             // параметрыМоделиToolStripMenuItem
             // 
@@ -196,7 +188,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(128, 86);
+            this.label1.Location = new System.Drawing.Point(129, 83);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(21, 13);
             this.label1.TabIndex = 35;
@@ -205,16 +197,17 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(55, 86);
+            this.label2.Location = new System.Drawing.Point(23, 77);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 13);
+            this.label2.Size = new System.Drawing.Size(102, 26);
             this.label2.TabIndex = 34;
-            this.label2.Text = "Масса нити:";
+            this.label2.Text = "Масса свисающей\r\nчасти нити:";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(128, 60);
+            this.label12.Location = new System.Drawing.Point(129, 55);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(24, 13);
             this.label12.TabIndex = 33;
@@ -223,7 +216,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(128, 34);
+            this.label11.Location = new System.Drawing.Point(129, 29);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(24, 13);
             this.label11.TabIndex = 32;
@@ -232,7 +225,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(128, 13);
+            this.label10.Location = new System.Drawing.Point(129, 8);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(13, 13);
             this.label10.TabIndex = 31;
@@ -241,7 +234,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(31, 54);
+            this.label7.Location = new System.Drawing.Point(32, 49);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(93, 26);
             this.label7.TabIndex = 30;
@@ -251,7 +244,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(46, 34);
+            this.label5.Location = new System.Drawing.Point(47, 29);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(78, 13);
             this.label5.TabIndex = 28;
@@ -260,7 +253,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(54, 13);
+            this.label4.Location = new System.Drawing.Point(55, 8);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 13);
             this.label4.TabIndex = 27;
@@ -320,6 +313,7 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -373,7 +367,6 @@
         private System.Windows.Forms.ToolStripMenuItem параметрыToolStripMenuItem;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.ToolStripMenuItem генерацияToolStripMenuItem;
         private Animation animation1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;

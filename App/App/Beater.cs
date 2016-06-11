@@ -42,7 +42,7 @@ namespace App
         {
             this.angle += -1 * direction * speed * (Math.PI / 30) * dT;
             
-            if (angle > startAngle + 2 * Math.PI)
+            if (angle > startAngle + Math.PI)
                 circlePassed = true;
         }
 

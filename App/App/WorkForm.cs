@@ -64,7 +64,7 @@ namespace App
                     //MessageBox.Show("Ошибка в движении нити, продолжить работу?", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                     rezultArray[currentNumberYarn - 1, 0] = 2;
 
-                    dataGridView1.Rows.Add(currentNumberYarn, "Ошибка",currentYarn.Length,currentYarn.Weight, "-");
+                    dataGridView1.Rows.Add(currentNumberYarn, "Ошибка",currentYarn.Length,"-", "-");
                     dataGridView1.Rows[currentNumberYarn - 1].Cells[0].Style.BackColor = Color.Red;
                 }
                 else
@@ -74,7 +74,7 @@ namespace App
                         //MessageBox.Show("Прядь сохранена. Максимальная сила натяжения - " + currentYarn.MaxF + " H.");
                         rezultArray[currentNumberYarn - 1, 0] = 1;
 
-                        dataGridView1.Rows.Add(currentNumberYarn, "Пройдена", currentYarn.Length, currentYarn.Weight, currentYarn.MaxF.ToString("f5"));
+                        dataGridView1.Rows.Add(currentNumberYarn, "Пройдена", currentYarn.Length.ToString("f5"), (currentYarn.Weight*1000).ToString("f5"), currentYarn.MaxF.ToString("f5"));
                         dataGridView1.Rows[currentNumberYarn - 1].Cells[0].Style.BackColor = Color.LightGreen;
                     }
                     else
@@ -82,7 +82,7 @@ namespace App
                         //MessageBox.Show("Прядь вылетела. Максимальная сила натяжения - " + currentYarn.MaxF + " H.");
                         rezultArray[currentNumberYarn - 1, 0] = 0;
 
-                        dataGridView1.Rows.Add(currentNumberYarn, "Вылетела", currentYarn.Length, currentYarn.Weight, currentYarn.MaxF.ToString("f5"));
+                        dataGridView1.Rows.Add(currentNumberYarn, "Вылетела", currentYarn.Length.ToString("f5"), (currentYarn.Weight*1000).ToString("f5"), currentYarn.MaxF.ToString("f5"));
                         dataGridView1.Rows[currentNumberYarn - 1].Cells[0].Style.BackColor = Color.LightGray;
                     }
                 }
@@ -96,6 +96,8 @@ namespace App
             {
                 timer2.Stop();
 
+                button1.Enabled = false;
+                параметрыМоделиToolStripMenuItem.Enabled = true;
                 //MessageBox.Show("Процесс закончен. Затрачено времени - " + label3.Text.ToString());
 
                 WriteRezult();
@@ -743,7 +745,7 @@ namespace App
                     rezultArray[i, 0] = 2;
             }
 
-            WriteRezult();
+            //WriteRezult();
         }
 
     }

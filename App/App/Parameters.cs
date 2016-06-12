@@ -173,9 +173,6 @@ namespace App
             if (double.TryParse(textBox15.Text, out a))
                 beltDistance = a;
 
-
-
-
             if (radioButton3.Checked)
             {
                 clampType = 1;
@@ -215,7 +212,8 @@ namespace App
                 if (double.TryParse(textBox37.Text, out a))
                 { R = a; }
 
-                double alpha = 2*Math.Asin(b/(2*R));
+                double asin = Math.Asin(b1 / (2 * R));
+                double alpha = 2 * asin;
                 clampLength = 2 * h + R * alpha;
             }
 
@@ -601,7 +599,7 @@ namespace App
                 ///Коэффициенты функции силы зажима
                 double[] x = { 0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09 };
 
-                double[] y = { 1, 1.4, 1.3, 2.5, 2.4, 4.7, 4.2, 6.8, 7.7, 8.5 };
+                double[] y = { 1.3, 1.7, 1.6, 2.8, 2.4, 4.9, 4.7, 7.3, 7.9, 8.7 };
 
                 this.clampForce = ApprFunction(x, y);
 
@@ -625,7 +623,7 @@ namespace App
                 ///Коэффициенты функции силы зажима
                 double[] x = { 0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09 };
 
-                double[] y = { 0.7, 0.9, 0.11, 2.1, 2, 4, 3.5, 6.5, 7, 8 };
+                double[] y = { 1, 0.9, 1.2, 2.1, 2.7, 4, 3.5, 6.2, 7.1, 7 };
 
                 this.clampForce = ApprFunction(x, y);
 

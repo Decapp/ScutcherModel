@@ -36,7 +36,7 @@ namespace App
 
         dPoint[] prev; ///Массив точек в предыдущий момент времени
         dPoint[] now; ///Массив точек в текущий момент времени
-
+        
         double hard; ///Коэффициент изгибной жесткости
 
         double[] pointWeight; ///Массив масс точек
@@ -136,7 +136,7 @@ namespace App
             dPoint[] next = new dPoint[pointCount];
 
             #region Проверка на отражение
-
+            
             for (int i = 0; i < pointCount; i++)
             {
                 for (int j = 0; j < beaters.Length; j++)
@@ -146,7 +146,7 @@ namespace App
                         double distance = Math.Pow((Math.Pow((now[i].X - beaters[j].Center.X), 2) +
                                 Math.Pow((now[i].Y - beaters[j].Center.Y), 2)), 0.5);
 
-                        if (distance + (length / (pointCount - 1)) / 500 < beaters[j].Radius)
+                        if (distance + (length / (pointCount - 1)) / 1000 < beaters[j].Radius)
                         {
 
                             double k = (beaters[j].Center.Y - beaters[j].Edge.Y) /
@@ -201,8 +201,9 @@ namespace App
                     }
                 }
             }
-
+            
             #endregion
+
 
 
             for (int i = 0; i < beaters.Length; i++)

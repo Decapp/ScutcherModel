@@ -129,6 +129,8 @@ namespace App
                 pictureBox2.Image = Properties.Resources.clamp3;
 
             pictureBox2.Location = new Point((int)(location * k - 49), pictureBox2.Location.Y);
+
+            pictureBox1.Image = null;
         }
     }
 }

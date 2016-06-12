@@ -38,62 +38,9 @@ namespace App
         {
             Parameters param = new Parameters(); ///Ввод параметров
             param.Owner = this;
-            param.ShowDialog();
-
-            rnd = new Random();
-
-            ///Имитационное моделирование потока слоя
-
-            #region Массивы длин, смещений и углов
-
-            ///Массив длин
-
-            lengthArray = new double[parameters.yarnCount];
-
-            for (int i = 0; i < parameters.yarnCount; i++)
-            {
-                double num = genNormNumber(parameters.expectedValueLength * 100,
-                    parameters.varianceLength * 100);
-
-                lengthArray[i] = num / 100;
-            }
-
-
-            ///Массив смещений
-
-            offsetArray = new double[parameters.yarnCount];
-
-            for (int i = 0; i < parameters.yarnCount; i++)
-            {
-                double num = genNormNumber(parameters.expectedValueOffset * 100,
-                    parameters.varianceOffset * 100);
-
-                offsetArray[i] = num / 100;
-            }
-
-
-            ///Массив углов
-
-            angleArray = new double[parameters.yarnCount];
-
-            for (int i = 0; i < parameters.yarnCount; i++)
-            {
-                double num = genNormNumber(parameters.expectedValueAngle,
-                    parameters.varianceAngle);
-
-                angleArray[i] = num;
-            }
-
-
-            #endregion
-           
-            Time = new DateTime(2016, 1, 1, 0, 0, 0);
-
-            rezultArray = new double[parameters.yarnCount, 3];
+            param.Show();
 
             InitializeComponent();
-
-            animation1.ClampParameters(parameters.clampType, parameters.threadPosition);
 
             dataGridView1.Columns.Add("number", "№");
             dataGridView1.Columns.Add("status", "Статус");
@@ -101,20 +48,8 @@ namespace App
             dataGridView1.Columns.Add("weight", "Масса");
             dataGridView1.Columns.Add("force", "F max");
 
-
-            for (int i = 0; i < rezultArray.GetLength(0); i++)
-            {
-                int r = rnd.Next(0,4);
-                
-                if (r == 1)
-                    rezultArray[i, 0] = 0;
-                if (r == 2)
-                    rezultArray[i, 0] = 1;
-                if (r == 3)
-                    rezultArray[i, 0] = 2;
-            }
-            
-            WriteRezult();
+            button1.Enabled = false;
+            параметрыМоделиToolStripMenuItem.Enabled = false;
         }
 
         /// <summary>
@@ -208,6 +143,7 @@ namespace App
             if (currentNumberYarn == 0)
             {
                 NextYarn();
+                параметрыМоделиToolStripMenuItem.Enabled = false;
                 button1.Text = "Пауза";
                 timer2.Start();
             }
@@ -216,11 +152,15 @@ namespace App
                 if (timer1.Enabled)
                 {
                     timer1.Stop();
+                    timer2.Stop();
+                    параметрыМоделиToolStripMenuItem.Enabled = true;
                     button1.Text = "Продолжить";
                 }
                 else
                 {
                     timer1.Start();
+                    timer2.Start();
+                    параметрыМоделиToolStripMenuItem.Enabled = false;
                     button1.Text = "Пауза";
                 }
             }
@@ -418,12 +358,12 @@ namespace App
                 book.Sheets[1].Activate();
                 Excel.ChartObjects chartsobjrcts = (Excel.ChartObjects)sheet.ChartObjects(Type.Missing);
                 Excel.ChartObject chartsobjrct = chartsobjrcts.Add(400, 20, 400, 300);
-                chartsobjrct.Chart.ChartWizard(sheet.get_Range("G1", "G" + intervals.GetLength(0).ToString()),
+                chartsobjrct.Chart.ChartWizard(sheet.get_Range("G2", "G" + (intervals.GetLength(0) + 1).ToString()),
                     Excel.XlChartType.xlColumnStacked, 2, Excel.XlRowCol.xlColumns, Type.Missing,
                     0, true, "Выход волокна", "Длина стеблей, см", "Доля выхода волокна", Type.Missing);
 
                 Excel.Range range;
-                range= sheet.Range[sheet.Cells[1, 1], sheet.Cells[intervals.GetLength(0)+1,7]];
+                range = sheet.Range[sheet.Cells[1, 1], sheet.Cells[intervals.GetLength(0) + 1, 7]];
                 range.ColumnWidth = 12;
                 range.WrapText = true;
                 range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
@@ -431,9 +371,54 @@ namespace App
             }
             else
             {
-                sheet.Cells[2, 1] = "Длина постоянна = ";
-                sheet.Cells[2, 2] = parameters.expectedValueLength;
-                sheet.Cells[2, 4] = "Влияние длины не учитывается";
+                intervals = new int[(int)(Math.Round(parameters.varianceLength * 100 * 2)), 3];
+
+                count = 0;
+                int countOff = 0;
+                int countOn = 0;
+
+                for (int i = 0; i < lengthArray.Length; i++)
+                {
+                    if (rezultArray[i, 0] != 2)
+                    {
+                        if (rezultArray[i, 0] == 0)
+                            countOff++;
+                        if (rezultArray[i, 0] == 1)
+                            countOn++;
+
+                        count++;
+                    }
+                }
+
+                sheet.Cells[1, 1] = "Длина волокна, см";
+                sheet.Cells[1, 2] = "Количество стеблей";
+                sheet.Cells[1, 3] = "Доля стеблей";
+                sheet.Cells[1, 4] = "Количество выпавших стеблей";
+                sheet.Cells[1, 5] = "Доля массы выпавших стеблей";
+                sheet.Cells[1, 6] = "Количество обработанных стеблей";
+                sheet.Cells[1, 7] = "Доля массы обработанных стеблей";
+
+
+
+
+
+                sheet.Cells[2, 1] = parameters.expectedValueLength;
+                sheet.Cells[2, 2] = count;
+                sheet.Cells[2, 3] = (double)count / (double)count;
+                sheet.Cells[2, 4] = countOff;
+                sheet.Cells[2, 5] = (double)countOff / (double)count;
+                sheet.Cells[2, 6] = countOn;
+                sheet.Cells[2, 7] = (double)countOn / (double)count;
+
+
+                book.Sheets[1].Activate();
+
+                Excel.Range range;
+                range = sheet.Range[sheet.Cells[1, 1], sheet.Cells[2, 7]];
+                range.ColumnWidth = 12;
+                range.WrapText = true;
+                range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                range.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
             }
 
             
@@ -487,7 +472,7 @@ namespace App
                 Excel.ChartObjects chartsobjrcts = (Excel.ChartObjects)sheet.ChartObjects(Type.Missing);
                 Excel.ChartObject chartsobjrct = chartsobjrcts.Add(150, 20, 400, 300);
 
-                chartsobjrct.Chart.ChartWizard(sheet.get_Range("A1", "B" + intervals.Length.ToString()),
+                chartsobjrct.Chart.ChartWizard(sheet.get_Range("A2", "B" + (intervals.Length+1).ToString()),
                     Excel.XlChartType.xlLine, 2, Excel.XlRowCol.xlColumns, Type.Missing,
                     0, true, "Распределение длин", "Длина", "Количество", Type.Missing);
 
@@ -511,7 +496,7 @@ namespace App
             sheet = book.Sheets[3];
             sheet.Name = "Смещения";
 
-            #region Запись смещений
+            #region Распределение смещений
 
             if (parameters.varianceOffset != 0)
             {
@@ -558,7 +543,7 @@ namespace App
                 Excel.ChartObjects chartsobjrcts = (Excel.ChartObjects)sheet.ChartObjects(Type.Missing);
                 Excel.ChartObject chartsobjrct = chartsobjrcts.Add(150, 20, 400, 300);
 
-                chartsobjrct.Chart.ChartWizard(sheet.get_Range("A1", "B" + intervals.GetLength(0).ToString()),
+                chartsobjrct.Chart.ChartWizard(sheet.get_Range("A2", "B" + (intervals.GetLength(0)+1).ToString()),
                     Excel.XlChartType.xlLine, 2, Excel.XlRowCol.xlColumns, Type.Missing,
                     0, true, "Распределение смещений", "Смещение", "Количество", Type.Missing);
                 
@@ -582,7 +567,7 @@ namespace App
             sheet = book.Sheets[4];
             sheet.Name = "Дезориентация";
 
-            #region Запись углов
+            #region Распределение углов
 
             if (parameters.varianceAngle != 0)
             {
@@ -624,7 +609,7 @@ namespace App
                 Excel.ChartObjects chartsobjrcts = (Excel.ChartObjects)sheet.ChartObjects(Type.Missing);
                 Excel.ChartObject chartsobjrct = chartsobjrcts.Add(150, 20, 400, 300);
 
-                chartsobjrct.Chart.ChartWizard(sheet.get_Range("A1", "B" + intervals.GetLength(0).ToString()),
+                chartsobjrct.Chart.ChartWizard(sheet.get_Range("A2", "B" + (intervals.GetLength(0) + 1).ToString()),
                     Excel.XlChartType.xlLine, 2, Excel.XlRowCol.xlColumns, Type.Missing,
                     0, true, "Распределение углов дезориентации", "Дезориентация", "Количество", Type.Missing);
 
@@ -652,8 +637,9 @@ namespace App
 
         private void параметрыМоделиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Parameters pr = new Parameters();
-            pr.Show();
+            Parameters param = new Parameters(); ///Ввод параметров
+            param.Owner = this;
+            param.Show();
         }
 
         /// <summary>
@@ -672,7 +658,92 @@ namespace App
         public ModelParameters MParameters
         {
             get { return parameters; }
-            set { parameters = value; }
+            set {
+                if (value != null)
+                {
+                    параметрыМоделиToolStripMenuItem.Enabled = true;
+                    button1.Enabled = true;
+
+                    parameters = value;
+                    LoadParameters();
+                }
+            }
+        }
+
+        private void LoadParameters()
+        {
+            ///Имитационное моделирование потока слоя
+
+            rnd = new Random();
+
+            #region Массивы длин, смещений и углов
+
+            ///Массив длин
+
+            lengthArray = new double[parameters.yarnCount];
+
+            for (int i = 0; i < parameters.yarnCount; i++)
+            {
+                double num = genNormNumber(parameters.expectedValueLength * 100,
+                    parameters.varianceLength * 100);
+
+                lengthArray[i] = num / 100;
+            }
+
+
+            ///Массив смещений
+
+            offsetArray = new double[parameters.yarnCount];
+
+            for (int i = 0; i < parameters.yarnCount; i++)
+            {
+                double num = genNormNumber(parameters.expectedValueOffset * 100,
+                    parameters.varianceOffset * 100);
+
+                offsetArray[i] = num / 100;
+            }
+
+
+            ///Массив углов
+
+            angleArray = new double[parameters.yarnCount];
+
+            for (int i = 0; i < parameters.yarnCount; i++)
+            {
+                double num = genNormNumber(parameters.expectedValueAngle,
+                    parameters.varianceAngle);
+
+                angleArray[i] = num;
+            }
+
+
+            #endregion
+
+            Time = new DateTime(2016, 1, 1, 0, 0, 0);
+
+            rezultArray = new double[parameters.yarnCount, 3];
+
+            animation1.ClampParameters(parameters.clampType, parameters.threadPosition);
+
+            dataGridView1.Rows.Clear();
+
+            chart1.Series[0].Points.Clear();
+
+            currentNumberYarn = 0;
+
+            for (int i = 0; i < rezultArray.GetLength(0); i++)
+            {
+                int r = rnd.Next(0, 4);
+
+                if (r == 1)
+                    rezultArray[i, 0] = 0;
+                if (r == 2)
+                    rezultArray[i, 0] = 1;
+                if (r == 3)
+                    rezultArray[i, 0] = 2;
+            }
+
+            WriteRezult();
         }
 
     }

@@ -33,25 +33,6 @@ namespace App
             radioButton8.Checked = true;
             radioButton3.Checked = true;
 
-
-            ///Коэффициенты функции силы зажима
-            double[] x = { 0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09 };
-
-            double[] y = { 0, 0.5, 0.7, 2.1, 2, 4, 3.5, 6.5, 7, 8 };
-
-            this.clampForce = ApprFunction(x, y);
-
-            textBox47.Text = clampForce[2].ToString("f5");
-            textBox46.Text = clampForce[1].ToString("f5");
-            textBox45.Text = clampForce[0].ToString("f5");
-
-            for (double i = 0; i <= 0.1; i += 0.01)
-            {
-                double j= clampForce[2] * Math.Pow(i, 2) + clampForce[1] * i + clampForce[0];
-                chart1.Series[0].Points.AddXY(i, j/10);
-            }
-
-
             ///Коэффициенты функции массы от длины
             double[] x1 = { 93, 78, 85, 73, 98, 79, 80, 92, 68, 87, 75, 77, 79, 58, 80 };
 
@@ -584,24 +565,82 @@ namespace App
         /// <param name="e"></param>
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
+            chart1.Series[0].Points.Clear();
+
             if (radioButton3.Checked)
             {
                 groupBox2.Enabled = true;
                 groupBox14.Enabled = false;
                 groupBox15.Enabled = false;
+
+
+                ///Коэффициенты функции силы зажима
+                double[] x = { 0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09 };
+
+                double[] y = { 0.7, 0.9, 0.11, 2.1, 2, 4, 3.5, 6.5, 7, 8 };
+
+                this.clampForce = ApprFunction(x, y);
+
+                textBox47.Text = clampForce[2].ToString("f5");
+                textBox46.Text = clampForce[1].ToString("f5");
+                textBox45.Text = clampForce[0].ToString("f5");
+
+                for (double i = 0; i <= 0.1; i += 0.01)
+                {
+                    double j = clampForce[2] * Math.Pow(i, 2) + clampForce[1] * i + clampForce[0];
+                    chart1.Series[0].Points.AddXY(i, j / 10);
+                }
             }
             else if (radioButton4.Checked)
             {
                 groupBox2.Enabled = false;
                 groupBox14.Enabled = true;
                 groupBox15.Enabled = false;
+
+
+                ///Коэффициенты функции силы зажима
+                double[] x = { 0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09 };
+
+                double[] y = { 1, 1.4, 1.3, 2.5, 2.4, 4.7, 4.2, 6.8, 7.7, 8.5 };
+
+                this.clampForce = ApprFunction(x, y);
+
+                textBox47.Text = clampForce[2].ToString("f5");
+                textBox46.Text = clampForce[1].ToString("f5");
+                textBox45.Text = clampForce[0].ToString("f5");
+
+                for (double i = 0; i <= 0.1; i += 0.01)
+                {
+                    double j = clampForce[2] * Math.Pow(i, 2) + clampForce[1] * i + clampForce[0];
+                    chart1.Series[0].Points.AddXY(i, j / 10);
+                }
             }
             else
             {
                 groupBox2.Enabled = false;
                 groupBox14.Enabled = false;
                 groupBox15.Enabled = true;
+
+
+                ///Коэффициенты функции силы зажима
+                double[] x = { 0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09 };
+
+                double[] y = { 0.7, 0.9, 0.11, 2.1, 2, 4, 3.5, 6.5, 7, 8 };
+
+                this.clampForce = ApprFunction(x, y);
+
+                textBox47.Text = clampForce[2].ToString("f5");
+                textBox46.Text = clampForce[1].ToString("f5");
+                textBox45.Text = clampForce[0].ToString("f5");
+
+                for (double i = 0; i <= 0.1; i += 0.01)
+                {
+                    double j = clampForce[2] * Math.Pow(i, 2) + clampForce[1] * i + clampForce[0];
+                    chart1.Series[0].Points.AddXY(i, j / 10);
+                }
             }
+
+            
         }
 
         private void Parameters_KeyUp(object sender, KeyEventArgs e)
@@ -611,8 +650,5 @@ namespace App
                 SaveAndLoad();
             }
         }
-
-
-
     }
 }

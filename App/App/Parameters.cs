@@ -109,81 +109,170 @@ namespace App
             double a;
             int b;
 
-            ///Смещение
+            #region Смещение
 
-            if (double.TryParse(textBox9.Text, out a))
+            if (double.TryParse(textBox9.Text, out a) || textBox9.Text != "0")
                 expectedValueOffset = a;
+            else
+            {
+                errorProvider1.SetError(textBox9, "Неверное значение");
+                return;
+            }
+
 
             if (double.TryParse(textBox8.Text, out a))
                 varianceOffset = a;
+            else
+            {
+                errorProvider1.SetError(textBox8, "Неверное значение");
+                return;
+            }
 
+            #endregion
 
-            ///Угол дезориентации
+            #region Угол дезориентации
 
-            if (double.TryParse(textBox13.Text, out a))
+            if (double.TryParse(textBox13.Text, out a) || textBox13.Text != "0")
                 expectedValueAngle = a;
+            else
+            {
+                errorProvider1.SetError(textBox13, "Неверное значение");
+                return;
+            }
+
 
             if (double.TryParse(textBox12.Text, out a))
                 varianceAngle = a;
+            else
+            {
+                errorProvider1.SetError(textBox12, "Неверное значение");
+                return;
+            }
 
+            #endregion
 
-            ///Длина пряди
+            #region Длина пряди
 
-            if (double.TryParse(textBox4.Text, out a))
+            if (double.TryParse(textBox4.Text, out a) && textBox4.Text != "0")
                 expectedValueLength = a;
+            else
+            {
+                errorProvider1.SetError(textBox4, "Неверное значение");
+                return;
+            }
+
 
             if (double.TryParse(textBox5.Text, out a))
                 varianceLength = a;
+            else
+            {
+                errorProvider1.SetError(textBox5, "Неверное значение");
+                return;
+            }
 
+            #endregion
 
-            ///Параметры пряди
+            #region Параметры пряди
 
-            if (double.TryParse(textBox31.Text, out a))
+            if (double.TryParse(textBox31.Text, out a) && textBox31.Text != "0")
                 threadYoungModul = a * Math.Pow(10, 10);
+            else
+            {
+                errorProvider1.SetError(textBox31, "Неверное значение");
+                return;
+            }
+
 
             if (double.TryParse(textBox30.Text, out a))
                 threadPosition = a;
+            else
+            {
+                errorProvider1.SetError(textBox30, "Неверное значение");
+                return;
+            }
 
-                threadPointCount = (int)numericUpDown1.Value;
+
+            threadPointCount = (int)numericUpDown1.Value;
+
 
             if (double.TryParse(textBox11.Text, out a))
                 threadFriction = a;
+            else
+            {
+                errorProvider1.SetError(textBox11, "Неверное значение");
+                return;
+            }
 
             if (double.TryParse(textBox14.Text, out a))
-                threadHard = a*Math.Pow(10,-10);
+                threadHard = a * Math.Pow(10, -10);
+            else
+            {
+                errorProvider1.SetError(textBox14, "Неверное значение");
+                return;
+            }
+
+            #endregion
+
+            #region Параметры модели
+
+            if (double.TryParse(textBox2.Text, out a) && textBox2.Text != "0")
+                dt = a * Math.Pow(10, -7);
+            else
+            {
+                errorProvider1.SetError(textBox2, "Неверное значение");
+                return;
+            }
 
 
-
-            ///Параметры модели
-
-            if (double.TryParse(textBox2.Text, out a))
-                dt = a*Math.Pow(10,-7);
-
-            if (int.TryParse(textBox16.Text, out b))
+            if (int.TryParse(textBox16.Text, out b) && textBox16.Text != "0")
                 yarnCount = b;
+            else
+            {
+                errorProvider1.SetError(textBox16, "Неверное значение");
+                return;
+            }
+
 
             if (double.TryParse(textBox10.Text, out a))
                 windage = a;
+            else
+            {
+                errorProvider1.SetError(textBox10, "Неверное значение");
+                return;
+            }
 
+            #endregion
 
-
-
-            ///Зажимной механизм
+            #region Зажимной механизм
 
             if (double.TryParse(textBox15.Text, out a))
                 beltDistance = a;
-
+            else
+            {
+                errorProvider1.SetError(textBox15, "Неверное значение"); return;
+            }
             if (radioButton3.Checked)
             {
                 clampType = 1;
 
-                double b1=0;
-                double h=0;
+                double b1 = 0;
+                double h = 0;
 
                 if (double.TryParse(textBox6.Text, out a))
-                { b1 = a; }
+                    b1 = a;
+                else
+                {
+                    errorProvider1.SetError(textBox6, "Неверное значение");
+                    return;
+                }
+
                 if (double.TryParse(textBox23.Text, out a))
-                { h = a; }
+                    h = a;
+                else
+                {
+                    errorProvider1.SetError(textBox23, "Неверное значение");
+                    return;
+                }
 
                 clampLength = 2 * h + b1;
             }
@@ -192,8 +281,14 @@ namespace App
                 clampType = 2;
 
                 double R = 0;
-                if (double.TryParse(textBox33.Text, out a))
-                { R = a; }
+
+                if (double.TryParse(textBox33.Text, out a) && textBox33.Text != "0")
+                    R = a;
+                else
+                {
+                    errorProvider1.SetError(textBox33, "Неверное значение");
+                    return;
+                }
 
                 clampLength = Math.PI * R;
             }
@@ -206,30 +301,68 @@ namespace App
                 double R = 0;
 
                 if (double.TryParse(textBox36.Text, out a))
-                { b1 = a; }
+                    b1 = a;
+                else
+                {
+                    errorProvider1.SetError(textBox36, "Неверное значение");
+                    return;
+                }
+
                 if (double.TryParse(textBox48.Text, out a))
-                { h = a; }
+                    h = a;
+                else
+                {
+                    errorProvider1.SetError(textBox48, "Неверное значение");
+                    return;
+                }
+
                 if (double.TryParse(textBox37.Text, out a))
-                { R = a; }
+                {
+                    R = a;
+                    if (R < b1)
+                    {
+                        errorProvider1.SetError(textBox37, "Неверное значение");
+                        return;
+                    }
+                }
+                else
+                {
+                    errorProvider1.SetError(textBox37, "Неверное значение");
+                    return;
+                }
 
                 double asin = Math.Asin(b1 / (2 * R));
                 double alpha = 2 * asin;
                 clampLength = 2 * h + R * alpha;
             }
 
+            #endregion
 
-            ///Барабаны
+            #region Барабаны
 
-            if (int.TryParse(textBox40.Text, out b))
+            if (int.TryParse(textBox40.Text, out b) && textBox40.Text != "0")
                 beatCount = b;
+            else
+            {
+                errorProvider1.SetError(textBox40, "Неверное значение");
+                return;
+            }
 
             if (double.TryParse(textBox7.Text, out a))
                 startAngle1 = a;
+            else
+            {
+                errorProvider1.SetError(textBox7, "Неверное значение");
+                return;
+            }
 
             if (double.TryParse(textBox35.Text, out a))
                 startAngle2 = a;
-
-
+            else
+            {
+                errorProvider1.SetError(textBox35, "Неверное значение");
+                return;
+            }
 
             rollParameter = new double[beatCount * 2, 6];
 
@@ -258,20 +391,32 @@ namespace App
                 catch
                 {
                     MessageBox.Show("Пожалуйста, проверьте параметры барабанов", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
                 }
             }
 
+            #endregion
 
-            ///Масса нити
+            #region Масса нити
 
             if (radioButton8.Checked)
             {
 
-                if (double.TryParse(textBox20.Text, out a))
+                if (double.TryParse(textBox20.Text, out a) && textBox20.Text != "0")
                     threadTopDiameter = a;
+                else
+                {
+                    errorProvider1.SetError(textBox20, "Неверное значение");
+                    return;
+                }
 
-                if (double.TryParse(textBox22.Text, out a))
+                if (double.TryParse(textBox22.Text, out a) && textBox22.Text != "0")
                     threadPlotn = a;
+                else
+                {
+                    errorProvider1.SetError(textBox22, "Неверное значение");
+                    return;
+                }
 
                 threadMidDiameter = null;
                 threadBotDiameter = null;
@@ -280,18 +425,37 @@ namespace App
             }
             else if (radioButton2.Checked)
             {
-
-                if (double.TryParse(textBox1.Text, out a))
+                if (double.TryParse(textBox1.Text, out a) && textBox1.Text != "0")
                     threadTopDiameter = a;
+                else
+                {
+                    errorProvider1.SetError(textBox1, "Неверное значение");
+                    return;
+                }
 
-                if (double.TryParse(textBox17.Text, out a))
+                if (double.TryParse(textBox17.Text, out a) && textBox17.Text != "0")
                     threadMidDiameter = a;
+                else
+                {
+                    errorProvider1.SetError(textBox17, "Неверное значение");
+                    return;
+                }
 
-                if (double.TryParse(textBox19.Text, out a))
+                if (double.TryParse(textBox19.Text, out a) && textBox19.Text != "0")
                     threadBotDiameter = a;
+                else
+                {
+                    errorProvider1.SetError(textBox19, "Неверное значение");
+                    return;
+                }
 
-                if (double.TryParse(textBox21.Text, out a))
+                if (double.TryParse(textBox21.Text, out a) && textBox21.Text != "0")
                     threadPlotn = a;
+                else
+                {
+                    errorProvider1.SetError(textBox21, "Неверное значение");
+                    return;
+                }
 
                 threadWeigthRasp = null;
             }
@@ -301,26 +465,52 @@ namespace App
 
                 threadWeigthRasp = new double?[4];
 
-                if (double.TryParse(textBox27.Text, out a))
+                if (double.TryParse(textBox27.Text, out a) && textBox27.Text != "0")
                     threadWeigthRasp[3] = a;
+                else
+                {
+                    errorProvider1.SetError(textBox27, "Неверное значение");
+                    return;
+                }
 
-                if (double.TryParse(textBox26.Text, out a))
+                if (double.TryParse(textBox26.Text, out a) && textBox26.Text != "0")
                     threadWeigthRasp[2] = a;
+                else
+                {
+                    errorProvider1.SetError(textBox26, "Неверное значение");
+                    return;
+                }
 
-                if (double.TryParse(textBox25.Text, out a))
+                if (double.TryParse(textBox25.Text, out a) && textBox25.Text != "0")
                     threadWeigthRasp[1] = a;
+                else
+                {
+                    errorProvider1.SetError(textBox25, "Неверное значение");
+                    return;
+                }
 
-                if (double.TryParse(textBox24.Text, out a))
+                if (double.TryParse(textBox24.Text, out a) && textBox24.Text != "0")
                     threadWeigthRasp[0] = a;
+                else
+                {
+                    errorProvider1.SetError(textBox24, "Неверное значение");
+                    return;
+                }
 
-                if (double.TryParse(textBox22.Text, out a))
+                if (double.TryParse(textBox22.Text, out a) && textBox22.Text != "0")
                     threadPlotn = a;
+                else
+                {
+                    errorProvider1.SetError(textBox22, "Неверное значение");
+                    return;
+                }
 
                 threadTopDiameter = null;
                 threadMidDiameter = null;
                 threadBotDiameter = null;
             }
 
+            #endregion
 
             WorkForm owner = this.Owner as WorkForm;
             if (owner != null)
@@ -328,10 +518,11 @@ namespace App
                 ModelParameters p = new ModelParameters(threadWeigthRasp, expectedValueLength,
                     varianceLength, threadTopDiameter, threadMidDiameter, threadBotDiameter, threadYoungModul,
                     threadPosition, threadFriction, threadHard, threadPlotn, expectedValueOffset, varianceOffset,
-                    expectedValueAngle, varianceAngle, rollParameter, clampLength, beltDistance,clampType, dt,
+                    expectedValueAngle, varianceAngle, rollParameter, clampLength, beltDistance, clampType, dt,
                     threadPointCount, yarnCount, windage, clampForce, weightLength);
 
                 owner.MParameters = p;
+                owner.Visible = true;
 
                 this.Close();
             }
@@ -464,12 +655,14 @@ namespace App
         private void textBox42_TextChanged(object sender, EventArgs e)
         {
             PictureRefresh();
+            Control c = (Control)sender;
+            errorProvider1.SetError(c, "");
         }
 
         /// <summary>
         /// Аппроксимация функции
         /// </summary>
-        public double[] ApprFunction(double[] x, double [] y)
+        public double[] ApprFunction(double[] x, double[] y)
         {
             double[,] a = new double[3, 3];
             double[] b = new double[3];
@@ -555,7 +748,7 @@ namespace App
                 groupBox13.Enabled = true;
             }
         }
-        
+
         /// <summary>
         /// Изменение типа зажимного механизма
         /// </summary>
@@ -638,7 +831,7 @@ namespace App
                 }
             }
 
-            
+
         }
 
         private void Parameters_KeyUp(object sender, KeyEventArgs e)
@@ -647,6 +840,12 @@ namespace App
             {
                 SaveAndLoad();
             }
+        }
+
+        private void textBox31_TextChanged(object sender, EventArgs e)
+        {
+            Control c = (Control)sender;
+            errorProvider1.SetError(c, "");
         }
     }
 }

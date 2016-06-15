@@ -274,20 +274,6 @@ namespace App
 
             book = application.ActiveWorkbook;
 
-            //sheet = book.Sheets[1];
-            //sheet.Name = "Результаты";
-
-            //sheet.Cells[1, 1] = "Результат";
-            //sheet.Cells[1, 2] = "Сила натяжения";
-            //sheet.Cells[1, 3] = "Масса";
-
-            //for (int i = 0; i < rezultArray.GetLength(0); i++)
-            //{
-            //    sheet.Cells[i + 3, 1] = rezultArray[i,0];
-            //    sheet.Cells[i + 3, 2] = rezultArray[i, 1];
-            //    sheet.Cells[i + 3, 3] = rezultArray[i, 2];
-            //}
-
             sheet = book.Sheets[1];
             sheet.Name = "Результат";
             int[,] intervals;
@@ -309,6 +295,13 @@ namespace App
 
                 count = 0;
 
+                double weightAll = 0;
+                double weightSaved = 0;
+                double weightNotSaved = 0;
+
+                int countSaved=0;
+                int countNotSaved=0;
+
                 for (int i = 0; i < lengthArray.Length; i++)
                 {
                     n = lengthArray[i] * 100;
@@ -322,12 +315,21 @@ namespace App
                     {
                         intervals[(int)n, 0]++;
                         count++;
-                    }
 
-                    if (rezultArray[i, 0] == 0)
-                        intervals[(int)n, 1]++;
-                    else if (rezultArray[i, 0] == 1)
-                        intervals[(int)n, 2]++;
+                        if (rezultArray[i, 0] == 0)
+                        {
+                            countNotSaved++;
+                            intervals[(int)n, 1]++;
+                            weightNotSaved += rezultArray[i, 2];
+                        }
+                        else if (rezultArray[i, 0] == 1)
+                        {
+                            countSaved++;
+                            intervals[(int)n, 2]++;
+                            weightSaved += rezultArray[i, 2];
+                        }
+                        weightAll += rezultArray[i, 2];
+                    }
                 }
 
                 sheet.Cells[1, 1] = "Длина волокна, см";
@@ -357,6 +359,25 @@ namespace App
                     sheet.Cells[i + 2, 7] = (double)intervals[i, 2] / (double)count;
                 }
 
+
+                sheet.Cells[intervals.GetLength(0) + 3, 1] = "Количество стеблей";
+                sheet.Cells[intervals.GetLength(0) + 3, 2] = "Масса стеблей";
+                sheet.Cells[intervals.GetLength(0) + 3, 3] = "Количество выпавших стеблей";
+                sheet.Cells[intervals.GetLength(0) + 3, 4] = "Масса выпавших стеблей";
+                sheet.Cells[intervals.GetLength(0) + 3, 5] = "Количество обработанных стеблей";
+                sheet.Cells[intervals.GetLength(0) + 3, 6] = "Масса обработанных стеблей";
+                sheet.Cells[intervals.GetLength(0) + 3, 7] = "Процент выхода волокна, %";
+
+                
+                sheet.Cells[intervals.GetLength(0) + 4, 1] = count;
+                sheet.Cells[intervals.GetLength(0) + 4, 2] = weightAll;
+                sheet.Cells[intervals.GetLength(0) + 4, 3] = countNotSaved;
+                sheet.Cells[intervals.GetLength(0) + 4, 4] = weightNotSaved;
+                sheet.Cells[intervals.GetLength(0) + 4, 5] = countSaved;
+                sheet.Cells[intervals.GetLength(0) + 4, 6] = weightSaved;
+                sheet.Cells[intervals.GetLength(0) + 4, 7] = (weightSaved/weightAll)*100;
+
+
                 book.Sheets[1].Activate();
                 Excel.ChartObjects chartsobjrcts = (Excel.ChartObjects)sheet.ChartObjects(Type.Missing);
                 Excel.ChartObject chartsobjrct = chartsobjrcts.Add(400, 20, 400, 300);
@@ -370,25 +391,42 @@ namespace App
                 range.WrapText = true;
                 range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 range.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+
+                range = sheet.Range[sheet.Cells[intervals.GetLength(0) + 3, 1], sheet.Cells[intervals.GetLength(0) + 4, 7]];
+                range.ColumnWidth = 12;
+                range.WrapText = true;
+                range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                range.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
             }
             else
             {
                 intervals = new int[(int)(Math.Round(parameters.varianceLength * 100 * 2)), 3];
 
                 count = 0;
-                int countOff = 0;
-                int countOn = 0;
+                int countNotSaved = 0;
+                int countSaved = 0;
+
+                double weightAll = 0;
+                double weightSaved = 0;
+                double weightNotSaved = 0;
 
                 for (int i = 0; i < lengthArray.Length; i++)
                 {
                     if (rezultArray[i, 0] != 2)
                     {
-                        if (rezultArray[i, 0] == 0)
-                            countOff++;
-                        if (rezultArray[i, 0] == 1)
-                            countOn++;
-
                         count++;
+
+                        if (rezultArray[i, 0] == 0)
+                        {
+                            countNotSaved++;
+                            weightNotSaved += rezultArray[i, 2];
+                        }
+                        else if (rezultArray[i, 0] == 1)
+                        {
+                            countSaved++;
+                            weightSaved += rezultArray[i, 2];
+                        }
+                        weightAll += rezultArray[i, 2];
                     }
                 }
 
@@ -401,22 +439,43 @@ namespace App
                 sheet.Cells[1, 7] = "Доля массы обработанных стеблей";
 
 
-
-
-
                 sheet.Cells[2, 1] = parameters.expectedValueLength;
                 sheet.Cells[2, 2] = count;
                 sheet.Cells[2, 3] = (double)count / (double)count;
-                sheet.Cells[2, 4] = countOff;
-                sheet.Cells[2, 5] = (double)countOff / (double)count;
-                sheet.Cells[2, 6] = countOn;
-                sheet.Cells[2, 7] = (double)countOn / (double)count;
+                sheet.Cells[2, 4] = countNotSaved;
+                sheet.Cells[2, 5] = (double)countNotSaved / (double)count;
+                sheet.Cells[2, 6] = countSaved;
+                sheet.Cells[2, 7] = (double)countSaved / (double)count;
+
+
+                sheet.Cells[intervals.GetLength(0) + 3, 1] = "Количество стеблей";
+                sheet.Cells[intervals.GetLength(0) + 3, 2] = "Масса стеблей";
+                sheet.Cells[intervals.GetLength(0) + 3, 3] = "Количество выпавших стеблей";
+                sheet.Cells[intervals.GetLength(0) + 3, 4] = "Масса выпавших стеблей";
+                sheet.Cells[intervals.GetLength(0) + 3, 5] = "Количество обработанных стеблей";
+                sheet.Cells[intervals.GetLength(0) + 3, 6] = "Масса обработанных стеблей";
+                sheet.Cells[intervals.GetLength(0) + 3, 7] = "Процент выхода волокна, %";
+
+
+                sheet.Cells[intervals.GetLength(0) + 4, 1] = count;
+                sheet.Cells[intervals.GetLength(0) + 4, 2] = weightAll;
+                sheet.Cells[intervals.GetLength(0) + 4, 3] = countNotSaved;
+                sheet.Cells[intervals.GetLength(0) + 4, 4] = weightNotSaved;
+                sheet.Cells[intervals.GetLength(0) + 4, 5] = countSaved;
+                sheet.Cells[intervals.GetLength(0) + 4, 6] = weightSaved;
+                sheet.Cells[intervals.GetLength(0) + 4, 7] = (weightSaved / weightAll) * 25; ///Доля волокна -25%
 
 
                 book.Sheets[1].Activate();
 
                 Excel.Range range;
                 range = sheet.Range[sheet.Cells[1, 1], sheet.Cells[2, 7]];
+                range.ColumnWidth = 12;
+                range.WrapText = true;
+                range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                range.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+
+                range = sheet.Range[sheet.Cells[intervals.GetLength(0) + 3, 1], sheet.Cells[intervals.GetLength(0) + 4, 7]];
                 range.ColumnWidth = 12;
                 range.WrapText = true;
                 range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;

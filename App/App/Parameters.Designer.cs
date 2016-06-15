@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Parameters));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -223,6 +224,7 @@
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -260,6 +262,7 @@
             this.groupBox14.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -343,6 +346,7 @@
             this.textBox5.TabIndex = 19;
             this.textBox5.Text = "0";
             this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // textBox4
             // 
@@ -352,6 +356,7 @@
             this.textBox4.TabIndex = 18;
             this.textBox4.Text = "0,6";
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // groupBox3
             // 
@@ -412,6 +417,7 @@
             this.textBox8.TabIndex = 19;
             this.textBox8.Text = "0";
             this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox8.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // textBox9
             // 
@@ -421,6 +427,7 @@
             this.textBox9.TabIndex = 18;
             this.textBox9.Text = "0,1";
             this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox9.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // groupBox4
             // 
@@ -481,6 +488,7 @@
             this.textBox12.TabIndex = 19;
             this.textBox12.Text = "0";
             this.textBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox12.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // textBox13
             // 
@@ -490,6 +498,7 @@
             this.textBox13.TabIndex = 18;
             this.textBox13.Text = "0";
             this.textBox13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox13.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // label6
             // 
@@ -526,6 +535,7 @@
             this.textBox1.TabIndex = 17;
             this.textBox1.Text = "0,00075";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // label35
             // 
@@ -580,6 +590,7 @@
             this.textBox24.TabIndex = 37;
             this.textBox24.Text = "0,00001411894";
             this.textBox24.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox24.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // textBox25
             // 
@@ -589,6 +600,7 @@
             this.textBox25.TabIndex = 36;
             this.textBox25.Text = "-0,001712585";
             this.textBox25.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox25.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // textBox26
             // 
@@ -598,6 +610,7 @@
             this.textBox26.TabIndex = 35;
             this.textBox26.Text = "0,039954";
             this.textBox26.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox26.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // textBox27
             // 
@@ -607,6 +620,7 @@
             this.textBox27.TabIndex = 34;
             this.textBox27.Text = "0,807235";
             this.textBox27.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox27.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // label34
             // 
@@ -713,6 +727,7 @@
             this.textBox14.TabIndex = 20;
             this.textBox14.Text = "0,01";
             this.textBox14.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox14.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // label18
             // 
@@ -741,6 +756,7 @@
             this.textBox11.TabIndex = 17;
             this.textBox11.Text = "0,2";
             this.textBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox11.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // label49
             // 
@@ -797,7 +813,7 @@
             this.textBox30.TabIndex = 2;
             this.textBox30.Text = "0,5";
             this.textBox30.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox30.TextChanged += new System.EventHandler(this.textBox42_TextChanged);
+            this.textBox30.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // label47
             // 
@@ -816,6 +832,7 @@
             this.textBox31.TabIndex = 1;
             this.textBox31.Text = "2";
             this.textBox31.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox31.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // groupBox9
             // 
@@ -888,6 +905,7 @@
             this.textBox23.TabIndex = 38;
             this.textBox23.Text = "0,02";
             this.textBox23.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox23.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // pictureBox8
             // 
@@ -926,6 +944,7 @@
             this.textBox6.TabIndex = 0;
             this.textBox6.Text = "0,04";
             this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox6.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // label39
             // 
@@ -954,6 +973,7 @@
             this.textBox15.TabIndex = 8;
             this.textBox15.Text = "0,14";
             this.textBox15.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox15.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // groupBox7
             // 
@@ -1305,6 +1325,7 @@
             this.textBox10.TabIndex = 24;
             this.textBox10.Text = "0,0009";
             this.textBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox10.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // label53
             // 
@@ -1324,6 +1345,7 @@
             this.textBox16.TabIndex = 22;
             this.textBox16.Text = "100";
             this.textBox16.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox16.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // label69
             // 
@@ -1361,6 +1383,7 @@
             this.textBox2.TabIndex = 0;
             this.textBox2.Text = "10";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // tabControl1
             // 
@@ -1393,22 +1416,22 @@
             // 
             // chart2
             // 
-            chartArea10.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea10);
-            legend10.Name = "Legend1";
-            this.chart2.Legends.Add(legend10);
+            chartArea1.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart2.Legends.Add(legend1);
             this.chart2.Location = new System.Drawing.Point(288, 30);
             this.chart2.Name = "chart2";
             this.chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
             this.chart2.PaletteCustomColors = new System.Drawing.Color[] {
         System.Drawing.Color.Black};
-            series10.ChartArea = "ChartArea1";
-            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series10.IsVisibleInLegend = false;
-            series10.Legend = "Legend1";
-            series10.LegendText = "M нити";
-            series10.Name = "Series1";
-            this.chart2.Series.Add(series10);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.IsVisibleInLegend = false;
+            series1.Legend = "Legend1";
+            series1.LegendText = "M нити";
+            series1.Name = "Series1";
+            this.chart2.Series.Add(series1);
             this.chart2.Size = new System.Drawing.Size(359, 207);
             this.chart2.TabIndex = 30;
             this.chart2.Text = "chart2";
@@ -1553,6 +1576,7 @@
             this.textBox18.TabIndex = 64;
             this.textBox18.Text = "500";
             this.textBox18.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox18.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // label8
             // 
@@ -1613,6 +1637,7 @@
             this.textBox21.TabIndex = 60;
             this.textBox21.Text = "500";
             this.textBox21.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox21.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // pictureBox4
             // 
@@ -1632,6 +1657,7 @@
             this.textBox17.TabIndex = 47;
             this.textBox17.Text = "0,0006";
             this.textBox17.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox17.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // label59
             // 
@@ -1713,6 +1739,7 @@
             this.textBox19.TabIndex = 49;
             this.textBox19.Text = "0,00025";
             this.textBox19.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox19.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // label76
             // 
@@ -1772,6 +1799,7 @@
             this.textBox22.TabIndex = 64;
             this.textBox22.Text = "500";
             this.textBox22.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox22.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // label83
             // 
@@ -1818,6 +1846,7 @@
             this.textBox20.TabIndex = 51;
             this.textBox20.Text = "0,00075";
             this.textBox20.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox20.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // label65
             // 
@@ -1984,22 +2013,22 @@
             // 
             // chart1
             // 
-            chartArea9.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea9);
-            legend9.Name = "Legend1";
-            this.chart1.Legends.Add(legend9);
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(282, 93);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
             this.chart1.PaletteCustomColors = new System.Drawing.Color[] {
         System.Drawing.Color.Black};
-            series9.ChartArea = "ChartArea1";
-            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series9.IsVisibleInLegend = false;
-            series9.Legend = "Legend1";
-            series9.LegendText = "F заж";
-            series9.Name = "Fзаж";
-            this.chart1.Series.Add(series9);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.IsVisibleInLegend = false;
+            series2.Legend = "Legend1";
+            series2.LegendText = "F заж";
+            series2.Name = "Fзаж";
+            this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(368, 250);
             this.chart1.TabIndex = 40;
             this.chart1.Text = "chart1";
@@ -2077,6 +2106,7 @@
             this.textBox48.TabIndex = 41;
             this.textBox48.Text = "0,02";
             this.textBox48.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox48.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // label87
             // 
@@ -2105,6 +2135,7 @@
             this.textBox36.TabIndex = 38;
             this.textBox36.Text = "0,04";
             this.textBox36.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox36.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // pictureBox10
             // 
@@ -2143,6 +2174,7 @@
             this.textBox37.TabIndex = 0;
             this.textBox37.Text = "0,08";
             this.textBox37.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox37.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // groupBox14
             // 
@@ -2193,6 +2225,7 @@
             this.textBox33.TabIndex = 0;
             this.textBox33.Text = "0,025";
             this.textBox33.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox33.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
             // 
             // radioButton3
             // 
@@ -2233,6 +2266,10 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Параметры модели";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // Parameters
             // 
@@ -2304,6 +2341,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2498,5 +2536,6 @@
         private System.Windows.Forms.Label label61;
         private System.Windows.Forms.Label label64;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
